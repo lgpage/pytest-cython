@@ -1,8 +1,11 @@
 """
-AppVeyor will at least have few Pythons around so there's no point of implementing a bootstrapper in PowerShell.
+AppVeyor will at least have few Pythons around so there's no point of
+implementing a bootstrapper in PowerShell.
 
-This is a port of https://github.com/pypa/python-packaging-user-guide/blob/master/source/code/install.ps1
-with various fixes and improvements that just weren't feasible to implement in PowerShell.
+This is a port of
+https://github.com/pypa/python-packaging-user-guide/blob/master/source/code/install.ps1
+with various fixes and improvements that just weren't feasible to implement in
+PowerShell.
 """
 from __future__ import print_function
 from os import environ
