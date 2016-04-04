@@ -4,14 +4,20 @@ from _pytest.doctest import DoctestModule
 
 def pytest_addoption(parser):
     group = parser.getgroup("cython")
-    group.addoption("--doctest-cython",
-        action="store_true", default=False,
+    group.addoption(
+        "--doctest-cython",
+        action="store_true",
+        default=False,
         help="run doctests in all .so and .pyd modules",
-        dest="doctestcython")
-    group.addoption("--doctest-ignore-import-errors",
-        action="store_true", default=True,
+        dest="doctestcython",
+        )
+    group.addoption(
+        "--doctest-ignore-import-errors",
+        action="store_true",
+        default=True,
         help="ignore doctest ImportErrors",
-        dest="doctest_ignore_import_errors")
+        dest="doctest_ignore_import_errors",
+        )
 
 
 def _binary_file_for(path):
