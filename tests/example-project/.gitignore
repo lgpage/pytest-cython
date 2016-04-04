@@ -1,0 +1,4 @@
+
+# Ignore Cython build files
+src/pypackage/*.c
+src/pypackage/*.cpp
