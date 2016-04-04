@@ -1,6 +1,6 @@
 graft docs
 graft examples
-graft src
+graft cython
 graft ci
 graft tests
 
