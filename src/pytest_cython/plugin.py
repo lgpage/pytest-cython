@@ -20,21 +20,20 @@ def pytest_addoption(parser):
         )
 
 
-def _binary_file_for(path):
-    bin_extensions = ['.so', '.pyd']
-    for ext in bin_extensions:
-        bin_file = path.new(ext=ext)
-        if bin_file.check():
-            return bin_file
-    return None
+def _find_first_matching_path(path, extensions):
+    for ext in extensions:
+        newpath = path.new(ext=ext)
+        if newpath.check():
+            return newpath
 
 
 def pytest_collect_file(path, parent):
+    bin_exts = ['.so']
+    cy_exts = ['.pyx', '.py']  # handle .so files if .py file exists
     config = parent.config
-    # let py.test --doctest-modules handle .py files even if they have been
-    # compiled with Cython
-    if path.ext == ".pyx":
-        if config.getoption("--doctest-cython"):
-            bin_file = _binary_file_for(path)
-            if bin_file is not None:
-                return DoctestModule(bin_file, parent)
+
+    if config.getvalue("--doctest-cython"):
+        if path.ext in bin_exts:
+            pyx_file = _find_first_matching_path(path, cy_exts)
+            if pyx_file is not None:
+                return DoctestModule(path, parent)

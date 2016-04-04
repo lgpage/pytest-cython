@@ -41,7 +41,7 @@ if __name__ == "__main__":
 
     if use_cython:
         ext_files = glob.glob('src/pypackage/*.pyx')
-        ext_files.extend(glob.glob('src/pypackage/*.py'))
+        #ext_files.extend(glob.glob('src/pypackage/*.py'))  # XXX - excluded due to py.test import problems
     else:
         ext_files = glob.glob('src/pypackage/*.c')
         ext_files.extend(glob.glob('src/pypackage/*.cpp'))
