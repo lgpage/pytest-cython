@@ -1,6 +1,6 @@
 
-import pytest_cython
+from cython import plugin
 
 
 def test_main():
-    assert pytest_cython  # use your library here
+    assert plugin  # use your library here
