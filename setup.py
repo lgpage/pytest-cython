@@ -76,9 +76,9 @@ setup(
     author='Logan Page',
     author_email='page.lg@gmail.com',
     url='https://github.com/lgpage/pytest-cython',
-    packages=find_packages('cython'),
-    package_dir={'': 'cython'},
-    py_modules=[splitext(basename(path))[0] for path in glob('cython/*.py')],
+    packages=find_packages('src'),
+    package_dir={'': 'src'},
+    py_modules=[splitext(basename(path))[0] for path in glob('src/*.py')],
     include_package_data=True,
     zip_safe=False,
     classifiers=[
@@ -120,16 +120,16 @@ setup(
     cmdclass={'build_ext': optional_build_ext},
     ext_modules=[
         Extension(
-            splitext(relpath(path, 'cython').replace(os.sep, '.'))[0],
+            splitext(relpath(path, 'src').replace(os.sep, '.'))[0],
             sources=[path],
             include_dirs=[dirname(path)]
         )
-        for root, _, _ in os.walk('cython')
+        for root, _, _ in os.walk('src')
         for path in glob(join(root, '*.pyx' if Cython else '*.c'))
     ],
     entry_points={
-        'cython': [
-            'cython = pytest_cython',
+        'pytest11': [
+            'pytest_cython = pytest_cython.plugin',
         ],
     },
 )

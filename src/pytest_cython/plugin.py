@@ -12,7 +12,7 @@ def pytest_addoption(parser):
         dest="doctestcython",
         )
     group.addoption(
-        "--doctest-ignore-import-errors",
+        "--cython-ignore-import-errors",
         action="store_true",
         default=True,
         help="ignore doctest ImportErrors",
