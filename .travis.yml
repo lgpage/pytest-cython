@@ -7,18 +7,43 @@ env:
     - SEGFAULT_SIGNALS=all
   matrix:
     - TOXENV=check
-    - TOXENV=docs
 
-    - TOXENV=2.7-cover,extension-coveralls,coveralls
-    - TOXENV=2.7-nocov
-    - TOXENV=3.3-cover,extension-coveralls,coveralls
-    - TOXENV=3.3-nocov
-    - TOXENV=3.4-cover,extension-coveralls,coveralls
-    - TOXENV=3.4-nocov
-    - TOXENV=3.5-cover,extension-coveralls,coveralls
-    - TOXENV=3.5-nocov
-    - TOXENV=pypy-cover,extension-coveralls,coveralls
-    - TOXENV=pypy-nocov
+    - TOXENV=py26-27-37
+    - TOXENV=py26-27-40
+    - TOXENV=py26-27-41
+    - TOXENV=py26-28-37
+    - TOXENV=py26-28-40
+    - TOXENV=py26-28-41
+    - TOXENV=py27-27-37
+    - TOXENV=py27-27-40
+    - TOXENV=py27-27-41
+    - TOXENV=py27-28-37
+    - TOXENV=py27-28-40
+    - TOXENV=py27-28-41
+    - TOXENV=py33-27-37
+    - TOXENV=py33-27-40
+    - TOXENV=py33-27-41
+    - TOXENV=py33-28-37
+    - TOXENV=py33-28-40
+    - TOXENV=py33-28-41
+    - TOXENV=py34-27-37
+    - TOXENV=py34-27-40
+    - TOXENV=py34-27-41
+    - TOXENV=py34-28-37
+    - TOXENV=py34-28-40
+    - TOXENV=py34-28-41
+    - TOXENV=py35-27-37
+    - TOXENV=py35-27-40
+    - TOXENV=py35-27-41
+    - TOXENV=py35-28-37
+    - TOXENV=py35-28-40
+    - TOXENV=py35-28-41
+    - TOXENV=pypy-27-37
+    - TOXENV=pypy-27-40
+    - TOXENV=pypy-27-41
+    - TOXENV=pypy-28-37
+    - TOXENV=pypy-28-40
+    - TOXENV=pypy-28-41
 before_install:
   - python --version
   - uname -a

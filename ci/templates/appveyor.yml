@@ -11,22 +11,22 @@ environment:
       PYTHON_VERSION: '2.7'
       PYTHON_ARCH: '32'
 
-{% for env, config in tox_environments|dictsort %}{% if config.python in ('python2.7', 'python3.3', 'python3.4', 'python3.5') %}
-    - TOXENV: '{{ env }}'
-      TOXPYTHON: C:\{{ config.python.replace('.', '').capitalize() }}\python.exe
-      PYTHON_HOME: C:\{{ config.python.replace('.', '').capitalize() }}
-      PYTHON_VERSION: '{{ config.python[-3:] }}'
+{% for env in tox_environments %}{% if env.startswith(('py27', 'py34', 'py35')) %}
+    - TOXENV: '{{ env }}{% if 'cover' in env %},codecov{% endif %}'
+      TOXPYTHON: C:\Python{{ env[2:4] }}\python.exe
+      PYTHON_HOME: C:\Python{{ env[2:4] }}
+      PYTHON_VERSION: '{{ env[2] }}.{{ env[3] }}'
       PYTHON_ARCH: '32'
 
-    - TOXENV: '{{ env }}'
-      TOXPYTHON: C:\{{ config.python.replace('.', '').capitalize() }}-x64\python.exe
-      {%- if config.python != 'python3.5' %}
+    - TOXENV: '{{ env }}{% if 'cover' in env %},codecov{% endif %}'
+      TOXPYTHON: C:\Python{{ env[2:4] }}-x64\python.exe
+      {%- if env.startswith(('py2', 'py33', 'py34')) %}
 
-      WINDOWS_SDK_VERSION: v7.{{ '1' if config.python[-3] == '3' else '0' }}
+      WINDOWS_SDK_VERSION: v7.{{ '1' if env.startswith('py3') else '0' }}
       {%- endif %}
 
-      PYTHON_HOME: C:\{{ config.python.replace('.', '').capitalize() }}-x64
-      PYTHON_VERSION: '{{ config.python[-3:] }}'
+      PYTHON_HOME: C:\Python{{ env[2:4] }}-x64
+      PYTHON_VERSION: '{{ env[2] }}.{{ env[3] }}'
       PYTHON_ARCH: '64'
 
 {% endif %}{% endfor %}
@@ -41,9 +41,6 @@ install:
   - '%PYTHON_HOME%\Scripts\tox --version'
 test_script:
   - '%WITH_COMPILER% %PYTHON_HOME%\Scripts\tox'
-
-after_test:
-  - IF "%TOXENV:~-8,8%" == "-nocov" %WITH_COMPILER% %TOXPYTHON% setup.py bdist_wheel
 
 on_failure:
   - ps: dir "env:"
