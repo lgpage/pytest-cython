@@ -5,9 +5,14 @@ import sys
 import pytest
 import sysconfig
 
+import _pytest
 from _pytest.doctest import get_optionflags
 from _pytest.doctest import DoctestItem
-from _pytest.doctest import _get_checker
+
+try:
+    from _pytest.doctest import _get_checker
+except ImportError:
+    _get_checker = None
 
 
 def pytest_addoption(parser):
@@ -42,7 +47,7 @@ def pytest_collect_file(path, parent):
 
     config = parent.config
     if path.ext in bin_exts:
-        if config.getvalue('doctest_cython'):
+        if config.getoption('--doctest-cython'):
             if ext_suffix is None:
                 bin_file = path
             else:
@@ -63,6 +68,7 @@ def _patch_pyimport(fspath, **kwargs):
         return fspath.pyimport(**kwargs)
     else:
         pkgroot = fspath.dirpath()
+        fspath._ensuresyspath(True, pkgroot)
         names = fspath.relto(pkgroot).split(fspath.sep)
         modname = ".".join(names).replace(ext_suffix, "")
         __import__(modname)
@@ -81,7 +87,7 @@ class DoctestModule(pytest.Module):
                 # XXX patch pyimport in pytest._pytest.doctest.DoctestModule
                 module = _patch_pyimport(self.fspath)
             except ImportError:
-                if self.config.getvalue('doctest_ignore_import_errors'):
+                if self.config.getoption('--cython-ignore-import-errors'):
                     pytest.skip('unable to import module %r' % self.fspath)
                 else:
                     raise
@@ -89,15 +95,16 @@ class DoctestModule(pytest.Module):
         # uses internal doctest module parsing mechanism
         finder = doctest.DocTestFinder()
         optionflags = get_optionflags(self)
+        checker = None if _get_checker is None else _get_checker()
         runner = doctest.DebugRunner(verbose=0, optionflags=optionflags,
-                                     checker=_get_checker())
+                                     checker=checker)
         for test in finder.find(module, module.__name__):
             if test.examples:  # skip empty doctests
                 yield DoctestItem(test.name, self, runner, test)
 
     def _importtestmodule(self):
         # we assume we are only called once per module
-        importmode = self.config.getoption("--import-mode")
+        importmode = self.config.getoption("--import-mode", default=True)
         try:
             # XXX patch pyimport in pytest._pytest.pythod.Module
             mod = _patch_pyimport(self.fspath, ensuresyspath=importmode)
@@ -116,6 +123,6 @@ class DoctestModule(pytest.Module):
                 "unique basename for your test file modules"
                 % e.args
             )
-        #print "imported test module", mod
+        # print "imported test module", mod
         self.config.pluginmanager.consider_module(mod)
         return mod
