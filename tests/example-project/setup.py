@@ -11,7 +11,7 @@ if __name__ == "__main__":
     from setuptools import setup
     from setuptools import Extension
 
-
+    root = os.path.dirname(__file__)
     directives = {
         'profile': True,
         'embedsignature': True,
@@ -39,16 +39,21 @@ if __name__ == "__main__":
         use_cython = False
         from distutils.command.build_ext import build_ext
 
+    if 'clean' in sys.argv:
+        [os.remove(x) for x in glob.glob(os.path.join(root, 'src/pypackage/*.c'))]
+        [os.remove(x) for x in glob.glob(os.path.join(root, 'src/pypackage/*.so'))]
+        [os.remove(x) for x in glob.glob(os.path.join(root, 'src/pypackage/*.cpp'))]
+
     if use_cython:
-        ext_files = glob.glob('src/pypackage/*.pyx')
-        #ext_files.extend(glob.glob('src/pypackage/*.py'))  # XXX - excluded due to py.test import problems
+        ext_files = glob.glob(os.path.join(root, 'src/pypackage/*.pyx'))
+        ext_files.extend(glob.glob(os.path.join(root, 'src/pypackage/*.py')))
     else:
-        ext_files = glob.glob('src/pypackage/*.c')
-        ext_files.extend(glob.glob('src/pypackage/*.cpp'))
+        ext_files = glob.glob(os.path.join(root, 'src/pypackage/*.c'))
+        ext_files.extend(glob.glob(os.path.join(root, 'src/pypackage/*.cpp')))
 
     extensions = []
     exclude_files = ['__init__.py']
-    include_dirs = [os.path.abspath('src/clib')]
+    include_dirs = [os.path.abspath(os.path.join(root, 'src/clib'))]
     for file_ in ext_files:
         if os.path.basename(file_) in exclude_files:
             continue
