@@ -1,5 +1,13 @@
 """ discover and run doctests in Cython extension modules."""
-from _pytest.doctest import DoctestModule
+from __future__ import absolute_import
+
+import sys
+import pytest
+import sysconfig
+
+from _pytest.doctest import get_optionflags
+from _pytest.doctest import DoctestItem
+from _pytest.doctest import _get_checker
 
 
 def pytest_addoption(parser):
@@ -9,18 +17,18 @@ def pytest_addoption(parser):
         action="store_true",
         default=False,
         help="run doctests in all .so and .pyd modules",
-        dest="doctestcython",
+        dest="doctest_cython",
         )
     group.addoption(
         "--cython-ignore-import-errors",
         action="store_true",
-        default=True,
+        default=False,
         help="ignore doctest ImportErrors",
         dest="doctest_ignore_import_errors",
         )
 
 
-def _find_first_matching_path(path, extensions):
+def _find_matching_pyx_file(path, extensions):
     for ext in extensions:
         newpath = path.new(ext=ext)
         if newpath.check():
@@ -29,11 +37,85 @@ def _find_first_matching_path(path, extensions):
 
 def pytest_collect_file(path, parent):
     bin_exts = ['.so']
-    cy_exts = ['.pyx', '.py']  # handle .so files if .py file exists
-    config = parent.config
+    cy_exts = ['.pyx', '.py']  # collect .so files if .py file exists
+    ext_suffix = sysconfig.get_config_var("EXT_SUFFIX")
 
-    if config.getvalue("--doctest-cython"):
-        if path.ext in bin_exts:
-            pyx_file = _find_first_matching_path(path, cy_exts)
+    config = parent.config
+    if path.ext in bin_exts:
+        if config.getvalue('doctest_cython'):
+            if ext_suffix is None:
+                bin_file = path
+            else:
+                basename = (path.basename).replace(ext_suffix, "")
+                bin_file = path.new(purebasename=basename, ext=path.ext)
+
+            pyx_file = _find_matching_pyx_file(bin_file, cy_exts)
+            # only run test if matching .so and .pyx files exist
+            # create addoption for this ??
             if pyx_file is not None:
                 return DoctestModule(path, parent)
+
+
+# XXX patch pyimport to support PEP 3149
+def _patch_pyimport(fspath, **kwargs):
+    ext_suffix = sysconfig.get_config_var("EXT_SUFFIX")
+    if ext_suffix is None:
+        return fspath.pyimport(**kwargs)
+    else:
+        pkgroot = fspath.dirpath()
+        names = fspath.relto(pkgroot).split(fspath.sep)
+        modname = ".".join(names).replace(ext_suffix, "")
+        __import__(modname)
+        return sys.modules[modname]
+
+
+class DoctestModule(pytest.Module):
+
+    def collect(self):
+        import doctest
+
+        if self.fspath.basename == "conftest.py":
+            module = self.config.pluginmanager._importconftest(self.fspath)
+        else:
+            try:
+                # XXX patch pyimport in pytest._pytest.doctest.DoctestModule
+                module = _patch_pyimport(self.fspath)
+            except ImportError:
+                if self.config.getvalue('doctest_ignore_import_errors'):
+                    pytest.skip('unable to import module %r' % self.fspath)
+                else:
+                    raise
+
+        # uses internal doctest module parsing mechanism
+        finder = doctest.DocTestFinder()
+        optionflags = get_optionflags(self)
+        runner = doctest.DebugRunner(verbose=0, optionflags=optionflags,
+                                     checker=_get_checker())
+        for test in finder.find(module, module.__name__):
+            if test.examples:  # skip empty doctests
+                yield DoctestItem(test.name, self, runner, test)
+
+    def _importtestmodule(self):
+        # we assume we are only called once per module
+        importmode = self.config.getoption("--import-mode")
+        try:
+            # XXX patch pyimport in pytest._pytest.pythod.Module
+            mod = _patch_pyimport(self.fspath, ensuresyspath=importmode)
+        except SyntaxError:
+            raise self.CollectError(
+                _pytest._code.ExceptionInfo().getrepr(style="short"))
+        except self.fspath.ImportMismatchError:
+            e = sys.exc_info()[1]
+            raise self.CollectError(
+                "import file mismatch:\n"
+                "imported module %r has this __file__ attribute:\n"
+                "  %s\n"
+                "which is not the same as the test file we want to collect:\n"
+                "  %s\n"
+                "HINT: remove __pycache__ / .pyc files and/or use a "
+                "unique basename for your test file modules"
+                % e.args
+            )
+        #print "imported test module", mod
+        self.config.pluginmanager.consider_module(mod)
+        return mod
