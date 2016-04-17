@@ -75,6 +75,7 @@ Note
 
 * It is assumed that the C extension modules have been build inplace before
   running `py.test` and there is a matching Cython `.pyx` file
+* The `embedsignature` `Cython compiler directive`_ must be set to `True`
 
 
 Contributing
@@ -123,3 +124,4 @@ This `Pytest`_ plugin was generated with `Cookiecutter`_ along with
 .. _`pip`: https://pypi.python.org/pypi/pip/
 .. _`PyPI`: https://pypi.python.org/pypi
 .. _`Cython`: http://cython.org/
+.. _`Cython compiler directive`: http://docs.cython.org/src/reference/compilation.html#compiler-directives
