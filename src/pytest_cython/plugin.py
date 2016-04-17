@@ -3,7 +3,11 @@ from __future__ import absolute_import
 
 import sys
 import pytest
-import sysconfig
+
+try:
+    import sysconfig
+except ImportError:
+    from distutils import sysconfig
 
 import _pytest
 from _pytest.doctest import get_optionflags
