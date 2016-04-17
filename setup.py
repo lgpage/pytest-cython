@@ -73,7 +73,8 @@ setup(
     ],
     extras_require={
     },
-    cmdclass={'build_ext': optional_build_ext},
+    cmdclass={
+    },
     entry_points={
         'pytest11': [
             'pytest_cython = pytest_cython.plugin',
