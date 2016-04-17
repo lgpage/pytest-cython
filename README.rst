@@ -9,8 +9,7 @@ Overview
     * - docs
       - |docs|
     * - tests
-      - | |travis| |appveyor| |requires|
-        | |coveralls|
+      - |travis| |appveyor| |requires|
     * - package
       - |version| |downloads| |wheel| |supported-versions| |supported-implementations|
 
