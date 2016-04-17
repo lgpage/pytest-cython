@@ -8,8 +8,8 @@ def sqr(a):
     """
     >>> sqr(2)
     4
-    >>> round(sqr(2.2), 2)
-    4.84
+    >>> '%.3g' % round(sqr(2.2), 2)
+    '4.84'
     >>> sqr("asd")
     Traceback (most recent call last):
     ...
