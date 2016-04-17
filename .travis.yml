@@ -8,24 +8,39 @@ env:
   matrix:
     - TOXENV=check
 
-    - TOXENV=py26-27
-    - TOXENV=py26-28
-    - TOXENV=py26-29
-    - TOXENV=py27-27
-    - TOXENV=py27-28
-    - TOXENV=py27-29
-    - TOXENV=py33-27
-    - TOXENV=py33-28
-    - TOXENV=py33-29
-    - TOXENV=py34-27
-    - TOXENV=py34-28
-    - TOXENV=py34-29
-    - TOXENV=py35-27
-    - TOXENV=py35-28
-    - TOXENV=py35-29
-    - TOXENV=pypy-27
-    - TOXENV=pypy-28
-    - TOXENV=pypy-29
+    - TOXENV=py26-27-023
+    - TOXENV=py26-27-024
+    - TOXENV=py26-28-023
+    - TOXENV=py26-28-024
+    - TOXENV=py26-29-023
+    - TOXENV=py26-29-024
+    - TOXENV=py27-27-023
+    - TOXENV=py27-27-024
+    - TOXENV=py27-28-023
+    - TOXENV=py27-28-024
+    - TOXENV=py27-29-023
+    - TOXENV=py27-29-024
+    - TOXENV=py33-27-023
+    - TOXENV=py33-27-024
+    - TOXENV=py33-28-023
+    - TOXENV=py33-28-024
+    - TOXENV=py33-29-023
+    - TOXENV=py33-29-024
+    - TOXENV=py34-27-023
+    - TOXENV=py34-27-024
+    - TOXENV=py34-28-023
+    - TOXENV=py34-28-024
+    - TOXENV=py34-29-023
+    - TOXENV=py34-29-024
+    - TOXENV=py35-27-023
+    - TOXENV=py35-27-024
+    - TOXENV=py35-28-023
+    - TOXENV=py35-28-024
+    - TOXENV=py35-29-023
+    - TOXENV=py35-29-024
+    - TOXENV=pypy-27-024
+    - TOXENV=pypy-28-024
+    - TOXENV=pypy-29-024
 before_install:
   - python --version
   - uname -a
