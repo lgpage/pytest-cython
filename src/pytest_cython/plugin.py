@@ -54,8 +54,13 @@ def pytest_collect_file(path, parent):
         if config.getoption('--doctest-cython'):
             if ext_suffix is None:
                 bin_file = path
+                # XXX EXT_SUFFIX is None for pypy (python2.7)
+                if '.pypy' in path.basename:
+                    basename = path.basename.split('.')[0]
+                    bin_file = path.new(purebasename=basename, ext=path.ext)
+
             else:
-                basename = (path.basename).replace(ext_suffix, "")
+                basename = path.basename.replace(ext_suffix, "")
                 bin_file = path.new(purebasename=basename, ext=path.ext)
 
             pyx_file = _find_matching_pyx_file(bin_file, cy_exts)
@@ -68,9 +73,17 @@ def pytest_collect_file(path, parent):
 # XXX patch pyimport to support PEP 3149
 def _patch_pyimport(fspath, **kwargs):
     ext_suffix = sysconfig.get_config_var("EXT_SUFFIX")
-    if ext_suffix is None:
+    # XXX EXT_SUFFIX is None for pypy (python2.7)
+    if ext_suffix is None and '.pypy' not in fspath.basename:
         return fspath.pyimport(**kwargs)
+
     else:
+        # XXX EXT_SUFFIX is None for pypy (python2.7)
+        if '.pypy' in fspath.basename:
+            ext_suffix = fspath.ext
+            basename = fspath.basename.split('.')[0]
+            fspath = fspath.new(purebasename=basename, ext=fspath.ext)
+
         pkgroot = fspath.dirpath()
         fspath._ensuresyspath(True, pkgroot)
         names = fspath.relto(pkgroot).split(fspath.sep)
