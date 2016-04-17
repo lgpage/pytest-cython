@@ -1,5 +1,5 @@
-pytest-cython
-=============
+Overview
+========
 
 .. start-badges
 
@@ -30,10 +30,6 @@ pytest-cython
     :alt: Requirements Status
     :target: https://requires.io/github/lgpage/pytest-cython/requirements/?branch=master
 
-.. |coveralls| image:: https://coveralls.io/repos/lgpage/pytest-cython/badge.svg?branch=master&service=github
-    :alt: Coverage Status
-    :target: https://coveralls.io/r/lgpage/pytest-cython
-
 .. |version| image:: https://img.shields.io/pypi/v/pytest-cython.svg?style=flat
     :alt: PyPI Package latest release
     :target: https://pypi.python.org/pypi/pytest-cython
@@ -56,76 +52,41 @@ pytest-cython
 
 .. end-badges
 
-A plugin for testing Cython extension modules
-
-----
-
-This `Pytest`_ plugin was generated with `Cookiecutter`_ along with
-`@hackebrot`_'s `Cookiecutter-pytest-plugin`_ and `@ionelmc`_'s
-`cookiecutter-pylibrary`_ templates.
-
-
-Features
---------
-
-* TODO
-
-
-Requirements
-------------
-
-* TODO
+This `Pytest`_ plugin allows for the doctesting of C extension modules
+for Python, specifically created through `Cython`_.
 
 
 Installation
-------------
+============
 
 You can install "pytest-cython" via `pip`_ from `PyPI`_::
 
-    $ pip install pytest-cython
+    pip install pytest-cython
 
 
 Usage
------
+=====
 
-* TODO
+Basic usage::
 
+    py.test --doctest-cython
 
-Documentation
--------------
+Note
+----
 
-https://pytest-cython.readthedocs.org/
+* It is assumed that the C extension modules have been build inplace before
+  running `py.test` and there is a matching Cython `.pyx` file
 
 
 Contributing
-------------
-Contributions are very welcome. Tests can be run with `tox`_, please ensure
-the coverage at least stays the same before you submit a pull request.
-
-To run the all tests run::
+============
+Contributions are very welcome. Tests can be run with `tox`_::
 
     tox
 
-Note, to combine the coverage data from all the tox environments run:
-
-.. list-table::
-    :widths: 10 90
-    :stub-columns: 1
-
-    - - Windows
-      - ::
-
-            set PYTEST_ADDOPTS=--cov-append
-            tox
-
-    - - Other
-      - ::
-
-            PYTEST_ADDOPTS=--cov-append tox
-
 
 License
--------
+=======
 
 * Free software: MIT license
 
@@ -134,10 +95,18 @@ open source software
 
 
 Issues
-------
+======
 
 If you encounter any problems, please `file an issue`_ along with a detailed
 description.
+
+
+Acknowledgements
+================
+
+This `Pytest`_ plugin was generated with `Cookiecutter`_ along with
+`@hackebrot`_'s `Cookiecutter-pytest-plugin`_ and `@ionelmc`_'s
+`cookiecutter-pylibrary`_ templates.
 
 
 .. _`Cookiecutter`: https://github.com/audreyr/cookiecutter
@@ -154,3 +123,4 @@ description.
 .. _`tox`: https://tox.readthedocs.org/en/latest/
 .. _`pip`: https://pypi.python.org/pypi/pip/
 .. _`PyPI`: https://pypi.python.org/pypi
+.. _`Cython`: http://cython.org/
