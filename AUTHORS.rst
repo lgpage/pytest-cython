@@ -2,4 +2,4 @@
 Authors
 =======
 
-* Logan Page - TODO
+* Logan Page - https://github.com/lgpage

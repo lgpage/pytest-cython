@@ -1,6 +1,6 @@
 graft docs
 graft examples
-graft src
+graft cython
 graft ci
 graft tests
 
@@ -19,3 +19,8 @@ include README.rst
 include tox.ini .travis.yml appveyor.yml
 
 global-exclude *.py[cod] __pycache__ *.so *.dylib
+
+global-exclude tests/example-project/build
+global-exclude tests/example-project/build/*
+global-exclude tests/example-project/src/pypackage/*.c
+global-exclude tests/example-project/src/pypackage/*.cpp

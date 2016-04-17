@@ -8,10 +8,12 @@ little bit helps, and credit will always be given.
 Bug reports
 ===========
 
-When `reporting a bug <https://github.com/lgpage/pytest-cython/issues>`_ please include:
+When `reporting a bug <https://github.com/lgpage/pytest-cython/issues>`_ please
+include:
 
     * Your operating system name and version.
-    * Any details about your local setup that might be helpful in troubleshooting.
+    * Any details about your local setup that might be helpful in
+      troubleshooting.
     * Detailed steps to reproduce the bug.
 
 Documentation improvements
@@ -24,13 +26,15 @@ articles, and such.
 Feature requests and feedback
 =============================
 
-The best way to send feedback is to file an issue at https://github.com/lgpage/pytest-cython/issues.
+The best way to send feedback is to file an issue at
+https://github.com/lgpage/pytest-cython/issues.
 
 If you are proposing a feature:
 
 * Explain in detail how it would work.
 * Keep the scope as narrow as possible, to make it easier to implement.
-* Remember that this is a volunteer-driven project, and that code contributions are welcome :)
+* Remember that this is a volunteer-driven project, and that code contributions
+  are welcome :)
 
 Development
 ===========
@@ -49,7 +53,9 @@ To set up `pytest-cython` for local development:
 
    Now you can make your changes locally.
 
-4. When you're done making changes, run all the checks, doc builder and spell checker with `tox <http://tox.readthedocs.org/en/latest/install.html>`_ one command::
+4. When you're done making changes, run all the checks, doc builder and spell
+   checker with `tox <http://tox.readthedocs.org/en/latest/install.html>`_ one
+   command::
 
     tox
 
@@ -64,7 +70,8 @@ To set up `pytest-cython` for local development:
 Pull Request Guidelines
 -----------------------
 
-If you need some code review or feedback while you're developing the code just make the pull request.
+If you need some code review or feedback while you're developing the code just
+make the pull request.
 
 For merging, you should:
 
@@ -73,8 +80,10 @@ For merging, you should:
 3. Add a note to ``CHANGELOG.rst`` about the changes.
 4. Add yourself to ``AUTHORS.rst``.
 
-.. [1] If you don't have all the necessary python versions available locally you can rely on Travis - it will
-       `run the tests <https://travis-ci.org/lgpage/pytest-cython/pull_requests>`_ for each change you add in the pull request.
+.. [1] If you don't have all the necessary python versions available locally
+       you can rely on Travis - it will `run the tests
+       <https://travis-ci.org/lgpage/pytest-cython/pull_requests>`_ for each
+       change you add in the pull request.
 
        It will be slower though ...
 
@@ -85,6 +94,7 @@ To run a subset of tests::
 
     tox -e envname -- py.test -k test_myfeature
 
-To run all the test environments in *parallel* (you need to ``pip install detox``)::
+To run all the test environments in *parallel* (you need to
+``pip install detox``)::
 
     detox

@@ -1,12 +1,12 @@
 [paths]
-source = src
+source = cython
 
 [run]
 branch = True
-source = src
 parallel = true
+source = cython
 
 [report]
-show_missing = true
 precision = 2
+show_missing = true
 omit = *migrations*

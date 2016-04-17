@@ -1,6 +1,5 @@
-========
-Overview
-========
+pytest-cython
+=============
 
 .. start-badges
 
@@ -12,7 +11,6 @@ Overview
     * - tests
       - | |travis| |appveyor| |requires|
         | |coveralls|
-        | |codeclimate|
     * - package
       - |version| |downloads| |wheel| |supported-versions| |supported-implementations|
 
@@ -36,10 +34,6 @@ Overview
     :alt: Coverage Status
     :target: https://coveralls.io/r/lgpage/pytest-cython
 
-.. |codeclimate| image:: https://codeclimate.com/github/lgpage/pytest-cython/badges/gpa.svg
-   :target: https://codeclimate.com/github/lgpage/pytest-cython
-   :alt: CodeClimate Quality Status
-
 .. |version| image:: https://img.shields.io/pypi/v/pytest-cython.svg?style=flat
     :alt: PyPI Package latest release
     :target: https://pypi.python.org/pypi/pytest-cython
@@ -60,27 +54,53 @@ Overview
     :alt: Supported implementations
     :target: https://pypi.python.org/pypi/pytest-cython
 
-
 .. end-badges
 
 A plugin for testing Cython extension modules
 
-* Free software: BSD license
+----
+
+This `Pytest`_ plugin was generated with `Cookiecutter`_ along with
+`@hackebrot`_'s `Cookiecutter-pytest-plugin`_ and `@ionelmc`_'s
+`cookiecutter-pylibrary`_ templates.
+
+
+Features
+--------
+
+* TODO
+
+
+Requirements
+------------
+
+* TODO
+
 
 Installation
-============
+------------
 
-::
+You can install "pytest-cython" via `pip`_ from `PyPI`_::
 
-    pip install pytest-cython
+    $ pip install pytest-cython
+
+
+Usage
+-----
+
+* TODO
+
 
 Documentation
-=============
+-------------
 
 https://pytest-cython.readthedocs.org/
 
-Development
-===========
+
+Contributing
+------------
+Contributions are very welcome. Tests can be run with `tox`_, please ensure
+the coverage at least stays the same before you submit a pull request.
 
 To run the all tests run::
 
@@ -102,3 +122,35 @@ Note, to combine the coverage data from all the tox environments run:
       - ::
 
             PYTEST_ADDOPTS=--cov-append tox
+
+
+License
+-------
+
+* Free software: MIT license
+
+Distributed under the terms of the `MIT`_ license, "pytest-cython" is free and
+open source software
+
+
+Issues
+------
+
+If you encounter any problems, please `file an issue`_ along with a detailed
+description.
+
+
+.. _`Cookiecutter`: https://github.com/audreyr/cookiecutter
+.. _`@hackebrot`: https://github.com/hackebrot
+.. _`@ionelmc`: https://github.com/ionelmc
+.. _`MIT`: http://opensource.org/licenses/MIT
+.. _`BSD-3`: http://opensource.org/licenses/BSD-3-Clause
+.. _`GNU GPL v3.0`: http://www.gnu.org/licenses/gpl-3.0.txt
+.. _`Apache Software License 2.0`: http://www.apache.org/licenses/LICENSE-2.0
+.. _`cookiecutter-pytest-plugin`: https://github.com/pytest-dev/cookiecutter-pytest-plugin
+.. _`cookiecutter-pylibrary`: https://github.com/ionelmc/cookiecutter-pylibrary
+.. _`file an issue`: https://github.com/lgpage/pytest-cython/issues
+.. _`pytest`: https://github.com/pytest-dev/pytest
+.. _`tox`: https://tox.readthedocs.org/en/latest/
+.. _`pip`: https://pypi.python.org/pypi/pip/
+.. _`PyPI`: https://pypi.python.org/pypi
