@@ -15,9 +15,9 @@ def test_cython_ext_module(testdir):
     assert module.check()
     result = testdir.runpytest('-vv', '--doctest-cython', str(module))
     result.stdout.fnmatch_lines([
-        "*Eggs.__init__ *PASSED",
-        "*Eggs.blarg*PASSED",
-        "*Eggs.fubar*PASSED",
+        "*Eggs.__init__ *PASSED*",
+        "*Eggs.blarg*PASSED*",
+        "*Eggs.fubar*PASSED*",
     ])
     assert result.ret == 0
 
@@ -27,7 +27,7 @@ def test_wrap_c_ext_module(testdir):
     assert module.check()
     result = testdir.runpytest('-vv', '--doctest-cython', str(module))
     result.stdout.fnmatch_lines([
-        "*sqr*PASSED",
+        "*sqr*PASSED*",
     ])
     assert result.ret == 0
 
@@ -37,7 +37,7 @@ def test_wrap_cpp_ext_module(testdir):
     assert module.check()
     result = testdir.runpytest('-vv', '--doctest-cython', str(module))
     result.stdout.fnmatch_lines([
-        "*sqr*PASSED",
+        "*sqr*PASSED*",
     ])
     assert result.ret == 0
 
@@ -47,8 +47,8 @@ def test_pure_py_module(testdir):
     assert module.check()
     result = testdir.runpytest('-vv', '--doctest-cython', str(module))
     result.stdout.fnmatch_lines([
-        "*Eggs.__init__*PASSED",
-        "*Eggs.foo*PASSED",
-        "*foo*PASSED",
+        "*Eggs.__init__*PASSED*",
+        "*Eggs.foo*PASSED*",
+        "*foo*PASSED*",
     ])
     assert result.ret == 0

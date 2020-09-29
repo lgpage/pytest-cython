@@ -55,11 +55,12 @@ if __name__ == "__main__":
     exclude_files = ['__init__.py']
     include_dirs = [os.path.abspath(os.path.join(root, 'src/clib'))]
     for file_ in ext_files:
-        if os.path.basename(file_) in exclude_files:
+        basename = os.path.basename(file_)
+        if basename in exclude_files:
             continue
-        pyx_file, _ = os.path.splitext(file_)
+        pyx_file, _ = os.path.splitext(basename)
         extensions.append(Extension(
-                pyx_file,
+                'src.pypackage.' + pyx_file,
                 [file_],
                 define_macros=macros,
                 include_dirs=include_dirs,
