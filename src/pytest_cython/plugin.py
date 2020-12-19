@@ -67,7 +67,7 @@ def pytest_collect_file(path, parent):
             # only run test if matching .so and .pyx files exist
             # create addoption for this ??
             if pyx_file is not None:
-                return DoctestModule.from_parent(parent, fs_path=path)
+                return DoctestModule.from_parent(parent, fspath=path)
 
 
 # XXX patch pyimport to support PEP 3149
