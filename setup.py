@@ -25,7 +25,7 @@ def read(*names, **kwargs):
 
 setup(
     name='pytest-cython',
-    version='0.1.0',
+    version='0.1.1',
     license='MIT',
     description='A plugin for testing Cython extension modules',
     long_description='%s\n%s' % (
