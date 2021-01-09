@@ -10,7 +10,6 @@ include .cookiecutterrc
 include .editorconfig
 include .isort.cfg
 
-include AUTHORS.rst
 include CHANGELOG.rst
 include CONTRIBUTING.rst
 include LICENSE

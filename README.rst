@@ -17,7 +17,7 @@ Overview
     :target: https://readthedocs.org/projects/pytest-cython
     :alt: Documentation Status
 
-.. |travis| image:: https://travis-ci.org/lgpage/pytest-cython.svg?branch=master
+.. |travis| image:: https://api.travis-ci.org/lgpage/pytest-cython.svg?branch=master
     :alt: Travis-CI Build Status
     :target: https://travis-ci.org/lgpage/pytest-cython
 
@@ -31,23 +31,23 @@ Overview
 
 .. |version| image:: https://img.shields.io/pypi/v/pytest-cython.svg?style=flat
     :alt: PyPI Package latest release
-    :target: https://pypi.python.org/pypi/pytest-cython
+    :target: https://pypi.org/project/pytest-cython
 
 .. |downloads| image:: https://img.shields.io/pypi/dm/pytest-cython.svg?style=flat
     :alt: PyPI Package monthly downloads
-    :target: https://pypi.python.org/pypi/pytest-cython
+    :target: https://pypi.org/project/pytest-cython
 
 .. |wheel| image:: https://img.shields.io/pypi/wheel/pytest-cython.svg?style=flat
     :alt: PyPI Wheel
-    :target: https://pypi.python.org/pypi/pytest-cython
+    :target: https://pypi.org/project/pytest-cython
 
 .. |supported-versions| image:: https://img.shields.io/pypi/pyversions/pytest-cython.svg?style=flat
     :alt: Supported versions
-    :target: https://pypi.python.org/pypi/pytest-cython
+    :target: https://pypi.org/project/pytest-cython
 
 .. |supported-implementations| image:: https://img.shields.io/pypi/implementation/pytest-cython.svg?style=flat
     :alt: Supported implementations
-    :target: https://pypi.python.org/pypi/pytest-cython
+    :target: https://pypi.org/project/pytest-cython
 
 .. end-badges
 
@@ -109,19 +109,19 @@ This `Pytest`_ plugin was generated with `Cookiecutter`_ along with
 `cookiecutter-pylibrary`_ templates.
 
 
-.. _`Cookiecutter`: https://github.com/audreyr/cookiecutter
+.. _`Cookiecutter`: https://github.com/cookiecutter/cookiecutter
 .. _`@hackebrot`: https://github.com/hackebrot
 .. _`@ionelmc`: https://github.com/ionelmc
-.. _`MIT`: http://opensource.org/licenses/MIT
-.. _`BSD-3`: http://opensource.org/licenses/BSD-3-Clause
-.. _`GNU GPL v3.0`: http://www.gnu.org/licenses/gpl-3.0.txt
-.. _`Apache Software License 2.0`: http://www.apache.org/licenses/LICENSE-2.0
+.. _`MIT`: https://opensource.org/licenses/MIT
+.. _`BSD-3`: https://opensource.org/licenses/BSD-3-Clause
+.. _`GNU GPL v3.0`: https://www.gnu.org/licenses/gpl-3.0.txt
+.. _`Apache Software License 2.0`: https://www.apache.org/licenses/LICENSE-2.0
 .. _`cookiecutter-pytest-plugin`: https://github.com/pytest-dev/cookiecutter-pytest-plugin
 .. _`cookiecutter-pylibrary`: https://github.com/ionelmc/cookiecutter-pylibrary
 .. _`file an issue`: https://github.com/lgpage/pytest-cython/issues
 .. _`pytest`: https://github.com/pytest-dev/pytest
-.. _`tox`: https://tox.readthedocs.org/en/latest/
-.. _`pip`: https://pypi.python.org/pypi/pip/
-.. _`PyPI`: https://pypi.python.org/pypi
-.. _`Cython`: http://cython.org/
-.. _`Cython compiler directive`: http://docs.cython.org/src/reference/compilation.html#compiler-directives
+.. _`tox`: https://tox.readthedocs.io/en/latest/
+.. _`pip`: https://pypi.org/project/pip/
+.. _`PyPI`: https://pypi.org
+.. _`Cython`: https://cython.org/
+.. _`Cython compiler directive`: https://docs.cython.org/en/latest/src/reference/compilation.html#compiler-directives
