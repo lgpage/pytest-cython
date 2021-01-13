@@ -1,7 +1,10 @@
 """ discover and run doctests in Cython extension modules."""
 from __future__ import absolute_import
 
+import keyword
+import re
 import sys
+import tokenize
 import pytest
 
 try:
@@ -70,6 +73,32 @@ def pytest_collect_file(path, parent):
                 return DoctestModule.from_parent(parent, fspath=path)
 
 
+# XXX if python2 support is dropped just use str.isidentifier
+def _isidentifier(s):
+    return (re.match('^' + tokenize.Name + '$', s)
+            and not keyword.iskeyword(s))
+
+
+# XXX copied from pytest but modified to use py.path instead; if Python 2
+# support is dropped and support for more modern pytest added we can just use
+# the one from pytest
+def _resolve_package_path(path):
+    """Return the Python package path by looking for the last
+    directory upwards which still contains an __init__.py.
+
+    Returns None if it can not be determined.
+    """
+    result = None
+    for parent in path.parts(reverse=True):
+        if parent.isdir():
+            if not parent.join('__init__.py').isfile():
+                break
+            if not _isidentifier(parent.basename):
+                break
+            result = parent
+    return result
+
+
 # XXX patch pyimport to support PEP 3149
 def _patch_pyimport(fspath, **kwargs):
     ext_suffix = sysconfig.get_config_var("EXT_SUFFIX")
@@ -84,12 +113,20 @@ def _patch_pyimport(fspath, **kwargs):
             basename = fspath.basename.split('.')[0]
             fspath = fspath.new(purebasename=basename, ext=fspath.ext)
 
-        pkgroot = fspath.dirpath()
-        fspath._ensuresyspath(True, pkgroot)
-        names = fspath.relto(pkgroot).split(fspath.sep)
-        modname = ".".join(names).replace(ext_suffix, "")
-        __import__(modname)
-        return sys.modules[modname]
+        pkg_path = _resolve_package_path(fspath)
+        if pkg_path is not None:
+            pkg_root = pkg_path.dirname
+            names = fspath.relto(pkg_root).split(fspath.sep)
+            if names[-1].startswith('__init__.'):
+                names.pop()
+            module_name = '.'.join(names).replace(ext_suffix, '')
+        else:
+            pkg_root = fspath.parent
+            module_name = fspath.basename.replace(ext_suffix, '')
+
+        fspath._ensuresyspath(True, pkg_root)
+        __import__(module_name)
+        return sys.modules[module_name]
 
 
 class DoctestModule(pytest.Module):
