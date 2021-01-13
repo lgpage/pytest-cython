@@ -1,37 +1,53 @@
-language: generic
-python:
-    - "2.7"
-    - "3.6"
-    - "3.7"
-    - "3.8"
-    - "pypy"
+language: python
 sudo: false
 env:
   global:
     - LD_PRELOAD=/lib/x86_64-linux-gnu/libSegFault.so
     - SEGFAULT_SIGNALS=all
-  matrix:
-    - TOXENV=check
-    - TOXENV=py27-46-028
-    - TOXENV=py27-46-029
-    - TOXENV=py36-46-028
-    - TOXENV=py36-46-029
-    - TOXENV=py36-54-028
-    - TOXENV=py36-54-029
-    - TOXENV=py36-62-028
-    - TOXENV=py36-62-029
-    - TOXENV=py37-46-028
-    - TOXENV=py37-46-029
-    - TOXENV=py37-54-028
-    - TOXENV=py37-54-029
-    - TOXENV=py37-62-028
-    - TOXENV=py37-62-029
-    - TOXENV=py38-46-029
-    - TOXENV=py38-54-029
-    - TOXENV=py38-62-029
-    - TOXENV=pypy-46-029
-    - TOXENV=pypy-54-029
-    - TOXENV=pypy-62-029
+jobs:
+    include:
+        - python: "3.7"
+          env: TOXENV=check
+        - python: "2.7"
+          env: TOXENV=py27-46-028
+        - python: "2.7"
+          env: TOXENV=py27-46-029
+        - python: "3.6"
+          env: TOXENV=py36-46-028
+        - python: "3.6"
+          env: TOXENV=py36-46-029
+        - python: "3.6"
+          env: TOXENV=py36-54-028
+        - python: "3.6"
+          env: TOXENV=py36-54-029
+        - python: "3.6"
+          env: TOXENV=py36-62-028
+        - python: "3.6"
+          env: TOXENV=py36-62-029
+        - python: "3.7"
+          env: TOXENV=py37-46-028
+        - python: "3.7"
+          env: TOXENV=py37-46-029
+        - python: "3.7"
+          env: TOXENV=py37-54-028
+        - python: "3.7"
+          env: TOXENV=py37-54-029
+        - python: "3.7"
+          env: TOXENV=py37-62-028
+        - python: "3.7"
+          env: TOXENV=py37-62-029
+        - python: "3.8"
+          env: TOXENV=py38-46-029
+        - python: "3.8"
+          env: TOXENV=py38-54-029
+        - python: "3.8"
+          env: TOXENV=py38-62-029
+        - python: "pypy"
+          env: TOXENV=pypy-46-029
+        - python: "pypy"
+          env: TOXENV=pypy-54-029
+        - python: "pypy"
+          env: TOXENV=pypy-62-029
 before_install:
   - python --version
   - uname -a
