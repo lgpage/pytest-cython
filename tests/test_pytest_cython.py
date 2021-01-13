@@ -1,13 +1,22 @@
 from __future__ import absolute_import
 
 import py
-import sys
+import pytest
+
+from setuptools.sandbox import run_setup
 
 import pytest_cython.plugin
 
+
 PATH = py.path.local(__file__).dirpath()
 PATH = PATH.join('example-project', 'src', 'pypackage')
-sys.path.insert(0, str(PATH))
+
+
+@pytest.fixture(scope='module', autouse=True)
+def build_example_project():
+    path = py.path.local(__file__).dirpath()
+    setup_py = path.join('example-project', 'setup.py')
+    run_setup(str(setup_py), ['build_ext', '--inplace'])
 
 
 def test_cython_ext_module(testdir):
