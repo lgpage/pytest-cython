@@ -44,10 +44,6 @@ jobs:
           env: TOXENV=py38-62-029
         - python: "pypy"
           env: TOXENV=pypy-46-029
-        - python: "pypy"
-          env: TOXENV=pypy-54-029
-        - python: "pypy"
-          env: TOXENV=pypy-62-029
 before_install:
   - python --version
   - uname -a
