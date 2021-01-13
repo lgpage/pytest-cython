@@ -70,7 +70,11 @@ def pytest_collect_file(path, parent):
             # only run test if matching .so and .pyx files exist
             # create addoption for this ??
             if pyx_file is not None:
-                return DoctestModule.from_parent(parent, fspath=path)
+                if hasattr(DoctestModule, 'from_parent'):
+                    return DoctestModule.from_parent(parent, fspath=path)
+                else:
+                    # Backwards-compat for older pytest
+                    return DoctestModule(path, parent)
 
 
 # XXX if python2 support is dropped just use str.isidentifier
@@ -154,7 +158,12 @@ class DoctestModule(pytest.Module):
                                      checker=checker)
         for test in finder.find(module, module.__name__):
             if test.examples:  # skip empty doctests
-                yield DoctestItem.from_parent(self, name=test.name, runner=runner, dtest=test)
+                if hasattr(DoctestItem, 'from_parent'):
+                    yield DoctestItem.from_parent(self, name=test.name,
+                                                  runner=runner, dtest=test)
+                else:
+                    # Backwards-compat for older pytest
+                    yield DoctestItem(test.name, self, runner, test)
 
     def _importtestmodule(self):
         # we assume we are only called once per module
