@@ -7,40 +7,26 @@ env:
     - SEGFAULT_SIGNALS=all
   matrix:
     - TOXENV=check
-
-    - TOXENV=py26-27-023
-    - TOXENV=py26-27-024
-    - TOXENV=py26-28-023
-    - TOXENV=py26-28-024
-    - TOXENV=py26-29-023
-    - TOXENV=py26-29-024
-    - TOXENV=py27-27-023
-    - TOXENV=py27-27-024
-    - TOXENV=py27-28-023
-    - TOXENV=py27-28-024
-    - TOXENV=py27-29-023
-    - TOXENV=py27-29-024
-    - TOXENV=py33-27-023
-    - TOXENV=py33-27-024
-    - TOXENV=py33-28-023
-    - TOXENV=py33-28-024
-    - TOXENV=py33-29-023
-    - TOXENV=py33-29-024
-    - TOXENV=py34-27-023
-    - TOXENV=py34-27-024
-    - TOXENV=py34-28-023
-    - TOXENV=py34-28-024
-    - TOXENV=py34-29-023
-    - TOXENV=py34-29-024
-    - TOXENV=py35-27-023
-    - TOXENV=py35-27-024
-    - TOXENV=py35-28-023
-    - TOXENV=py35-28-024
-    - TOXENV=py35-29-023
-    - TOXENV=py35-29-024
-    - TOXENV=pypy-27-024
-    - TOXENV=pypy-28-024
-    - TOXENV=pypy-29-024
+    - TOXENV=py27-46-028
+    - TOXENV=py27-46-029
+    - TOXENV=py36-46-028
+    - TOXENV=py36-46-029
+    - TOXENV=py36-54-028
+    - TOXENV=py36-54-029
+    - TOXENV=py36-62-028
+    - TOXENV=py36-62-029
+    - TOXENV=py37-46-028
+    - TOXENV=py37-46-029
+    - TOXENV=py37-54-028
+    - TOXENV=py37-54-029
+    - TOXENV=py37-62-028
+    - TOXENV=py37-62-029
+    - TOXENV=py38-46-029
+    - TOXENV=py38-54-029
+    - TOXENV=py38-62-029
+    - TOXENV=pypy-46-029
+    - TOXENV=pypy-54-029
+    - TOXENV=pypy-62-029
 before_install:
   - python --version
   - uname -a
