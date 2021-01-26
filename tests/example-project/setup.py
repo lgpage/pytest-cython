@@ -100,7 +100,7 @@ if __name__ == "__main__":
 
     setup(
         name='pytest-cython',
-        version='0.1.0',
+        version='0.1.1',
         description="Example Cython project for pytest-cython tests",
         zip_safe=False,
         cmdclass={'build_ext': optional_build_ext},
