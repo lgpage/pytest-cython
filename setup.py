@@ -17,7 +17,7 @@ with open(path.join(this_directory, 'README.rst')) as readme_file:
 
 setup(
     name='pytest-cython',
-    version='0.1.1',
+    version='0.1.1.post0',
     description='A plugin for testing Cython extension modules',
     long_description=long_description,
     long_description_content_type='text/x-rst',
