@@ -1,5 +1,6 @@
 language: python
-sudo: false
+os: linux
+dist: xenial
 env:
   global:
     - LD_PRELOAD=/lib/x86_64-linux-gnu/libSegFault.so
