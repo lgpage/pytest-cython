@@ -48,7 +48,7 @@ def _find_matching_pyx_file(path, extensions):
 
 
 def pytest_collect_file(path, parent):
-    bin_exts = ['.so']
+    bin_exts = ['.so', '.dll']
     cy_exts = ['.pyx', '.py']  # collect .so files if .py file exists
     ext_suffix = sysconfig.get_config_var("EXT_SUFFIX")
 
