@@ -1,17 +1,45 @@
 from __future__ import absolute_import
 
+import sysconfig
+
 import py
-import sys
+import pytest
+from setuptools.sandbox import run_setup
 
 import pytest_cython.plugin
 
+
 PATH = py.path.local(__file__).dirpath()
 PATH = PATH.join('example-project', 'src', 'pypackage')
-sys.path.insert(0, str(PATH))
+
+try:
+    import __pypy__
+    import imp
+    # Suffix will be something like pypy-N.so; this is how pypy's own distutils
+    # patch does this...
+    for ext in imp.get_suffixes():
+        if ext[2] == imp.C_EXTENSION:
+            EXT_SUFFIX = ext[0]
+            break
+    else:
+        EXT_SUFFIX = '.so'
+except ImportError:
+    EXT_SUFFIX = sysconfig.get_config_var("EXT_SUFFIX") or '.so'
+
+
+def get_module(basename, suffix=EXT_SUFFIX):
+    return PATH.join(basename + suffix)
+
+
+@pytest.fixture(scope='module', autouse=True)
+def build_example_project():
+    path = py.path.local(__file__).dirpath()
+    setup_py = path.join('example-project', 'setup.py')
+    run_setup(str(setup_py), ['build_ext', '--inplace'])
 
 
 def test_cython_ext_module(testdir):
-    module = PATH.listdir(fil='cython_ext_module*.so')[0]
+    module = get_module('cython_ext_module')
     assert module.check()
     result = testdir.runpytest('-vv', '--doctest-cython', str(module))
     result.stdout.fnmatch_lines([
@@ -23,7 +51,7 @@ def test_cython_ext_module(testdir):
 
 
 def test_wrap_c_ext_module(testdir):
-    module = PATH.listdir(fil='wrap_c_ext_module*.so')[0]
+    module = get_module('wrap_c_ext_module')
     assert module.check()
     result = testdir.runpytest('-vv', '--doctest-cython', str(module))
     result.stdout.fnmatch_lines([
@@ -33,7 +61,7 @@ def test_wrap_c_ext_module(testdir):
 
 
 def test_wrap_cpp_ext_module(testdir):
-    module = PATH.listdir(fil='wrap_cpp_ext_module*.so')[0]
+    module = get_module('wrap_cpp_ext_module')
     assert module.check()
     result = testdir.runpytest('-vv', '--doctest-cython', str(module))
     result.stdout.fnmatch_lines([
@@ -43,7 +71,7 @@ def test_wrap_cpp_ext_module(testdir):
 
 
 def test_pure_py_module(testdir):
-    module = PATH.listdir(fil='pure_py_module*.py')[0]
+    module = get_module('pure_py_module', suffix='.py')
     assert module.check()
     result = testdir.runpytest('-vv', '--doctest-cython', str(module))
     result.stdout.fnmatch_lines([
