@@ -9,32 +9,8 @@ jobs:
     include:
         - python: "3.7"
           env: TOXENV=check
-        - python: "2.7"
-          env: TOXENV=py27-46-028
-        - python: "2.7"
-          env: TOXENV=py27-46-029
-        - python: "3.6"
-          env: TOXENV=py36-46-028
-        - python: "3.6"
-          env: TOXENV=py36-46-029
-        - python: "3.6"
-          env: TOXENV=py36-54-028
-        - python: "3.6"
-          env: TOXENV=py36-54-029
-        - python: "3.6"
-          env: TOXENV=py36-62-028
         - python: "3.6"
           env: TOXENV=py36-62-029
-        - python: "3.7"
-          env: TOXENV=py37-46-028
-        - python: "3.7"
-          env: TOXENV=py37-46-029
-        - python: "3.7"
-          env: TOXENV=py37-54-028
-        - python: "3.7"
-          env: TOXENV=py37-54-029
-        - python: "3.7"
-          env: TOXENV=py37-62-028
         - python: "3.7"
           env: TOXENV=py37-62-029
         - python: "3.8"
@@ -43,8 +19,8 @@ jobs:
           env: TOXENV=py38-54-029
         - python: "3.8"
           env: TOXENV=py38-62-029
-        - python: "pypy"
-          env: TOXENV=pypy-46-029
+        - python: "pypy3"
+          env: TOXENV=pypy3-62-029
 before_install:
   - python --version
   - uname -a
