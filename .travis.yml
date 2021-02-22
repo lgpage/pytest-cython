@@ -14,11 +14,13 @@ jobs:
         - python: "3.7"
           env: TOXENV=py37-62-029
         - python: "3.8"
-          env: TOXENV=py38-46-029
-        - python: "3.8"
-          env: TOXENV=py38-54-029
-        - python: "3.8"
           env: TOXENV=py38-62-029
+        - python: "3.9"
+          env: TOXENV=py39-46-029
+        - python: "3.9"
+          env: TOXENV=py39-54-029
+        - python: "3.9"
+          env: TOXENV=py39-62-029
         - python: "pypy3"
           env: TOXENV=pypy3-62-029
 before_install:
