@@ -11,20 +11,7 @@ import pytest_cython.plugin
 
 PATH = py.path.local(__file__).dirpath()
 PATH = PATH.join('example-project', 'src', 'pypackage')
-
-try:
-    import __pypy__
-    import imp
-    # Suffix will be something like pypy-N.so; this is how pypy's own distutils
-    # patch does this...
-    for ext in imp.get_suffixes():
-        if ext[2] == imp.C_EXTENSION:
-            EXT_SUFFIX = ext[0]
-            break
-    else:
-        EXT_SUFFIX = '.so'
-except ImportError:
-    EXT_SUFFIX = sysconfig.get_config_var("EXT_SUFFIX") or '.so'
+EXT_SUFFIX = sysconfig.get_config_var("EXT_SUFFIX") or '.so'
 
 
 def get_module(basename, suffix=EXT_SUFFIX):

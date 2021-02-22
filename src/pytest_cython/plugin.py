@@ -1,16 +1,9 @@
 """ discover and run doctests in Cython extension modules."""
-from __future__ import absolute_import
 
-import keyword
-import re
 import sys
-import tokenize
-import pytest
+import sysconfig
 
-try:
-    import sysconfig
-except ImportError:
-    from distutils import sysconfig
+import pytest
 
 import _pytest
 from _pytest.doctest import get_optionflags
@@ -77,13 +70,7 @@ def pytest_collect_file(path, parent):
                     return DoctestModule(path, parent)
 
 
-# XXX if python2 support is dropped just use str.isidentifier
-def _isidentifier(s):
-    return (re.match('^' + tokenize.Name + '$', s)
-            and not keyword.iskeyword(s))
-
-
-# XXX copied from pytest but modified to use py.path instead; if Python 2
+# XXX copied from pytest but modified to use py.path instead; if pytest<6.0
 # support is dropped and support for more modern pytest added we can just use
 # the one from pytest
 def _resolve_package_path(path):
@@ -97,7 +84,7 @@ def _resolve_package_path(path):
         if parent.isdir():
             if not parent.join('__init__.py').isfile():
                 break
-            if not _isidentifier(parent.basename):
+            if not parent.basename.isidentifier():
                 break
             result = parent
     return result
