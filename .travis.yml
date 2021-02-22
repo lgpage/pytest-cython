@@ -9,10 +9,6 @@ jobs:
     include:
         - python: "3.7"
           env: TOXENV=check
-        - python: "2.7"
-          env: TOXENV=py27-46-028
-        - python: "2.7"
-          env: TOXENV=py27-46-029
         - python: "3.6"
           env: TOXENV=py36-46-028
         - python: "3.6"
