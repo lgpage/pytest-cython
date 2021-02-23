@@ -10,8 +10,10 @@ classmethods
 cython
 docstrings
 doctesting
+embray
 inplace
 kwargs
 pytest
 staticmethod
 staticmethods
+thrasibule

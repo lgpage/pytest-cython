@@ -6,7 +6,9 @@ from os import path
 from setuptools import find_packages
 from setuptools import setup
 
+
 this_directory = path.abspath(path.dirname(__file__))
+
 
 with open(path.join(this_directory, 'README.rst')) as readme_file:
     long_description = readme_file.read()
@@ -14,7 +16,7 @@ with open(path.join(this_directory, 'README.rst')) as readme_file:
 
 setup(
     name='pytest-cython',
-    version='0.1.1.post0',
+    version='0.2.dev0',
     description='A plugin for testing Cython extension modules',
     long_description=long_description,
     long_description_content_type='text/x-rst',
@@ -55,10 +57,6 @@ setup(
     install_requires=[
         'pytest>=4.6.0',
     ],
-    extras_require={
-    },
-    cmdclass={
-    },
     entry_points={
         'pytest11': [
             'pytest_cython = pytest_cython.plugin',

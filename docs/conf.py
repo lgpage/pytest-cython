@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
 import os
+import sys
+
+
+sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 
 
 extensions = [
@@ -20,11 +24,13 @@ if os.getenv('SPELLCHECK'):
 
 source_suffix = '.rst'
 master_doc = 'index'
-project = u'pytest-cython'
-year = '2016'
-author = u'Logan Page'
+project = 'pytest-cython'
+year = '2021'
+author = 'Logan Page'
 copyright = '{0}, {1}'.format(year, author)
-version = release = u'0.1.1'
+
+
+from pytest_cython import __version__ as release
 
 pygments_style = 'trac'
 templates_path = ['.']
@@ -45,7 +51,7 @@ html_split_index = True
 html_sidebars = {
    '**': ['searchbox.html', 'globaltoc.html', 'sourcelink.html'],
 }
-html_short_title = '%s-%s' % (project, version)
+html_short_title = f'{project}-{release}'
 
 napoleon_use_ivar = True
 napoleon_use_rtype = False
