@@ -43,32 +43,20 @@ def pytest_addoption(parser):
         )
 
 
-def _find_matching_pyx_file(path, extensions):
-    for ext in extensions:
-        newpath = path.new(ext=ext)
-        if newpath.check():
-            return newpath
-
-
 def pytest_collect_file(path, parent):
-    bin_exts = ['.so']
-    cy_exts = ['.pyx', '.py']  # collect .so files if .py file exists
+    cy_exts = ['.py', '.pyx']
 
     config = parent.config
-    if path.ext in bin_exts:
-        if config.getoption('--doctest-cython'):
-            basename = path.basename.replace(EXT_SUFFIX, "")
-            bin_file = path.new(purebasename=basename, ext=path.ext)
-
-            pyx_file = _find_matching_pyx_file(bin_file, cy_exts)
+    if path.ext in cy_exts and config.getoption('--doctest-cython'):
+        bin_path = path.new(ext=EXT_SUFFIX)
+        if bin_path.check():
             # only run test if matching .so and .pyx files exist
             # create addoption for this ??
-            if pyx_file is not None:
-                if hasattr(DoctestModule, 'from_parent'):
-                    return DoctestModule.from_parent(parent, fspath=path)
-                else:
-                    # Backwards-compat for older pytest
-                    return DoctestModule(path, parent)
+            if hasattr(DoctestModule, 'from_parent'):
+                return DoctestModule.from_parent(parent, fspath=path)
+            else:
+                # Backwards-compat for older pytest
+                return DoctestModule(path, parent)
 
 
 class _PatchedLocalPath(py.path.local):
@@ -131,12 +119,16 @@ class DoctestModule(pytest.Module):
         if self.fspath.basename == "conftest.py":
             module = self.config.pluginmanager._importconftest(self.fspath)
         else:
+            bin_path = self.fspath.new(ext=EXT_SUFFIX)
             try:
                 # XXX patch pyimport in pytest._pytest.doctest.DoctestModule
-                module = _patch_pyimport(self.fspath)
+                # import the extension module, not the .py/.pyx module
+                module = _patch_pyimport(bin_path)
             except ImportError:
                 if self.config.getoption('--cython-ignore-import-errors'):
-                    pytest.skip('unable to import module %r' % self.fspath)
+                    pytest.skip(
+                        f'unable to import module {self.fspath} from '
+                        f'{bin_path}')
                 else:
                     raise
 
