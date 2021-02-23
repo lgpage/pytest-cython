@@ -14,7 +14,10 @@ if __name__ == "__main__":
         'profile': True,
         'embedsignature': False,
         'linetrace': False,
-        'language_level': sys.version_info[0]
+        'language_level': sys.version_info[0],
+        # this is the default, but use it explicitly in case that ever
+        # changes
+        'autotestdict': True
     }
 
     # Enable code coverage for C code: we can't use CFLAGS=-coverage in

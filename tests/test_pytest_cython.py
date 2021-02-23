@@ -42,9 +42,20 @@ def test_cython_ext_module(testdir, import_mode):
     result.stdout.fnmatch_lines([
         "*Eggs.__init__ *PASSED*",
         "*Eggs.blarg*PASSED*",
+        "*Eggs.failing_test*FAILED*",
         "*Eggs.fubar*PASSED*",
+        "*",
+        "*FAILURES*",
+        "*pypackage.cython_ext_module.Eggs.failing_test*",
+        "078*",
+        "079         >>> eggs = Eggs(1, 1)*",
+        "080         >>> eggs.failing_test()*",
+        "Expected:*",
+        "    False*",
+        "Got:*",
+        "    True*"
     ])
-    assert result.ret == 0
+    assert result.ret == 1
 
 
 @pytest.mark.parametrize('import_mode', IMPORT_MODES)
