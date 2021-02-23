@@ -12,7 +12,7 @@ if __name__ == "__main__":
 
     directives = {
         'profile': True,
-        'embedsignature': True,
+        'embedsignature': False,
         'linetrace': False,
         'language_level': sys.version_info[0]
     }

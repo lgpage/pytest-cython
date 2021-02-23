@@ -11,7 +11,6 @@ import pytest_cython.plugin
 
 PATH = py.path.local(__file__).dirpath()
 PATH = PATH.join('example-project', 'src', 'pypackage')
-EXT_SUFFIX = sysconfig.get_config_var("EXT_SUFFIX") or '.so'
 
 PYTEST_MAJOR_VERSION = int(pytest.__version__.split('.')[0])
 IMPORT_MODES = ['prepend', 'append']
@@ -19,7 +18,7 @@ if PYTEST_MAJOR_VERSION >= 6:
     IMPORT_MODES.insert(0, 'importlib')
 
 
-def get_module(basename, suffix=EXT_SUFFIX):
+def get_module(basename, suffix='.pyx'):
     return PATH.join(basename + suffix)
 
 

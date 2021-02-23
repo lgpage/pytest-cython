@@ -75,7 +75,6 @@ Note
 
 * It is assumed that the C extension modules have been build inplace before
   running `py.test` and there is a matching Cython `.pyx` file
-* The `embedsignature` `Cython compiler directive`_ must be set to `True`
 
 
 Contributing
