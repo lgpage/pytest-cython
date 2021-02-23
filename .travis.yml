@@ -23,6 +23,13 @@ jobs:
           env: TOXENV=py39-62-029
         - python: "pypy3"
           env: TOXENV=pypy3-62-029
+        - os: windows
+          env: TOXENV=py39-62-029
+          language: shell
+          before_install:
+            - choco install python --version 3.9.2
+            - python --version
+            - python -m pip install --upgrade pip
 before_install:
   - python --version
   - uname -a
@@ -30,7 +37,6 @@ before_install:
 install:
   - pip install tox
   - virtualenv --version
-  - easy_install --version
   - pip --version
   - tox --version
 script:
