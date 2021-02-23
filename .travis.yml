@@ -33,7 +33,9 @@ jobs:
           env: TOXENV=pypy3-62-029
         - name: Windows - Python 3.9 - pytest 6.2 - Cython 0.29
           os: windows
-          env: TOXENV=py39-62-029
+          env:
+              - TOXENV=py39-62-029
+              - LD_PRELOAD=
           language: shell
           before_install:
             - choco install python --version 3.9.2
