@@ -112,9 +112,6 @@ This `Pytest`_ plugin was generated with `Cookiecutter`_ along with
 .. _`@hackebrot`: https://github.com/hackebrot
 .. _`@ionelmc`: https://github.com/ionelmc
 .. _`MIT`: https://opensource.org/licenses/MIT
-.. _`BSD-3`: https://opensource.org/licenses/BSD-3-Clause
-.. _`GNU GPL v3.0`: https://www.gnu.org/licenses/gpl-3.0.txt
-.. _`Apache Software License 2.0`: https://www.apache.org/licenses/LICENSE-2.0
 .. _`cookiecutter-pytest-plugin`: https://github.com/pytest-dev/cookiecutter-pytest-plugin
 .. _`cookiecutter-pylibrary`: https://github.com/ionelmc/cookiecutter-pylibrary
 .. _`file an issue`: https://github.com/lgpage/pytest-cython/issues
@@ -123,4 +120,3 @@ This `Pytest`_ plugin was generated with `Cookiecutter`_ along with
 .. _`pip`: https://pypi.org/project/pip/
 .. _`PyPI`: https://pypi.org
 .. _`Cython`: https://cython.org/
-.. _`Cython compiler directive`: https://docs.cython.org/en/latest/src/reference/compilation.html#compiler-directives
