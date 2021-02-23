@@ -36,6 +36,7 @@ jobs:
           env:
               - TOXENV=py39-62-029
               - LD_PRELOAD=
+              - PATH=/c/Python39:/c/Python39/Scripts:$PATH
           language: shell
           before_install:
             - choco install python --version 3.9.2
