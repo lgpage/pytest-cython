@@ -1,18 +1,28 @@
 """ discover and run doctests in Cython extension modules."""
 
+import pathlib
 import sys
 import sysconfig
 
 import pytest
+import py.path
 
 import _pytest
 from _pytest.doctest import get_optionflags
 from _pytest.doctest import DoctestItem
 
 try:
+    from _pytest.pathlib import import_path  # pytest>=6.0 only
+except ImportError:
+    import_path = None
+
+try:
     from _pytest.doctest import _get_checker
 except ImportError:
     _get_checker = None
+
+
+EXT_SUFFIX = sysconfig.get_config_var("EXT_SUFFIX")
 
 
 def pytest_addoption(parser):
@@ -43,21 +53,12 @@ def _find_matching_pyx_file(path, extensions):
 def pytest_collect_file(path, parent):
     bin_exts = ['.so']
     cy_exts = ['.pyx', '.py']  # collect .so files if .py file exists
-    ext_suffix = sysconfig.get_config_var("EXT_SUFFIX")
 
     config = parent.config
     if path.ext in bin_exts:
         if config.getoption('--doctest-cython'):
-            if ext_suffix is None:
-                bin_file = path
-                # XXX EXT_SUFFIX is None for pypy (python2.7)
-                if '.pypy' in path.basename:
-                    basename = path.basename.split('.')[0]
-                    bin_file = path.new(purebasename=basename, ext=path.ext)
-
-            else:
-                basename = path.basename.replace(ext_suffix, "")
-                bin_file = path.new(purebasename=basename, ext=path.ext)
+            basename = path.basename.replace(EXT_SUFFIX, "")
+            bin_file = path.new(purebasename=basename, ext=path.ext)
 
             pyx_file = _find_matching_pyx_file(bin_file, cy_exts)
             # only run test if matching .so and .pyx files exist
@@ -70,54 +71,56 @@ def pytest_collect_file(path, parent):
                     return DoctestModule(path, parent)
 
 
-# XXX copied from pytest but modified to use py.path instead; if pytest<6.0
-# support is dropped and support for more modern pytest added we can just use
-# the one from pytest
-def _resolve_package_path(path):
-    """Return the Python package path by looking for the last
-    directory upwards which still contains an __init__.py.
-
-    Returns None if it can not be determined.
+class _PatchedLocalPath(py.path.local):
     """
-    result = None
-    for parent in path.parts(reverse=True):
-        if parent.isdir():
-            if not parent.join('__init__.py').isfile():
-                break
-            if not parent.basename.isidentifier():
-                break
-            result = parent
-    return result
+    py.path.local path patched so that py.path.local.pyimport() will work
+    if it is a PEP 3149 ABI extension module.  See _patch_pyimport.
+    """
+
+    @property
+    def purebasename(self):
+        return super().basename.replace(EXT_SUFFIX, '')
+
+    def new(self, **kwargs):
+        kwargs.pop('purebasename', None)
+        return super().new(purebasename=self.purebasename, **kwargs)
+
+
+class _PatchedPath(pathlib.Path):
+    """
+    Similar to _PatchedLocalPath but implements the equivalent hacks so that
+    the `pathlib`-based ``import_path`` computes the module name correctly.
+    """
+
+    @property
+    def stem(self):
+        return super().name.replace(EXT_SUFFIX, '')
+
+    def with_suffix(self, suffix):
+        return self.with_name(self.stem + suffix)
 
 
 # XXX patch pyimport to support PEP 3149
-def _patch_pyimport(fspath, **kwargs):
-    ext_suffix = sysconfig.get_config_var("EXT_SUFFIX")
-    # XXX EXT_SUFFIX is None for pypy (python2.7)
-    if ext_suffix is None and '.pypy' not in fspath.basename:
-        return fspath.pyimport(**kwargs)
+def _patch_pyimport(fspath, import_mode='prepend'):
+    # pytest does not properly support PEP 3149 ABI tagged extension modules
+    # (this should be fixed upstream); this provides an alternative
+    # implementation (mostly copied from the original) which provides it
 
+    # this supports pytest>=6.0 which uses import_path, as well as older
+    # versions that use py.path.local.pyimport
+    if isinstance(fspath, py.path.local):
+        if fspath.basename.endswith(EXT_SUFFIX):
+            fspath = _PatchedLocalPath(fspath)
+
+        if import_mode == 'prepend':
+            # the equivalent spelling in py.path.local.pyimport's
+            # ensuresyspath argument
+            import_mode = True
+
+        return fspath.pyimport(ensuresyspath=import_mode)
     else:
-        # XXX EXT_SUFFIX is None for pypy (python2.7)
-        if '.pypy' in fspath.basename:
-            ext_suffix = fspath.ext
-            basename = fspath.basename.split('.')[0]
-            fspath = fspath.new(purebasename=basename, ext=fspath.ext)
-
-        pkg_path = _resolve_package_path(fspath)
-        if pkg_path is not None:
-            pkg_root = pkg_path.dirname
-            names = fspath.relto(pkg_root).split(fspath.sep)
-            if names[-1].startswith('__init__.'):
-                names.pop()
-            module_name = '.'.join(names).replace(ext_suffix, '')
-        else:
-            pkg_root = fspath.parent
-            module_name = fspath.basename.replace(ext_suffix, '')
-
-        fspath._ensuresyspath(True, pkg_root)
-        __import__(module_name)
-        return sys.modules[module_name]
+        fspath = _PatchedPath(fspath)
+        return import_path(fspath, import_mode=import_mode)
 
 
 class DoctestModule(pytest.Module):
@@ -154,10 +157,10 @@ class DoctestModule(pytest.Module):
 
     def _importtestmodule(self):
         # we assume we are only called once per module
-        importmode = self.config.getoption("--import-mode", default=True)
+        importmode = self.config.getoption("--import-mode", default="prepend")
         try:
             # XXX patch pyimport in pytest._pytest.pythod.Module
-            mod = _patch_pyimport(self.fspath, ensuresyspath=importmode)
+            mod = _patch_pyimport(self.fspath, importmode=importmode)
         except SyntaxError:
             raise self.CollectError(
                 _pytest._code.ExceptionInfo().getrepr(style="short"))

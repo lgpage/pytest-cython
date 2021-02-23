@@ -13,9 +13,19 @@ PATH = py.path.local(__file__).dirpath()
 PATH = PATH.join('example-project', 'src', 'pypackage')
 EXT_SUFFIX = sysconfig.get_config_var("EXT_SUFFIX") or '.so'
 
+PYTEST_MAJOR_VERSION = int(pytest.__version__.split('.')[0])
+IMPORT_MODES = ['prepend', 'append']
+if PYTEST_MAJOR_VERSION >= 6:
+    IMPORT_MODES.insert(0, 'importlib')
+
 
 def get_module(basename, suffix=EXT_SUFFIX):
     return PATH.join(basename + suffix)
+
+
+def run_pytest(testdir, module, import_mode):
+    return testdir.runpytest('-vv', '--doctest-cython',
+                             '--import-mode', import_mode, str(module))
 
 
 @pytest.fixture(scope='module', autouse=True)
@@ -25,10 +35,11 @@ def build_example_project():
     run_setup(str(setup_py), ['build_ext', '--inplace'])
 
 
-def test_cython_ext_module(testdir):
+@pytest.mark.parametrize('import_mode', IMPORT_MODES)
+def test_cython_ext_module(testdir, import_mode):
     module = get_module('cython_ext_module')
     assert module.check()
-    result = testdir.runpytest('-vv', '--doctest-cython', str(module))
+    result = run_pytest(testdir, module, import_mode)
     result.stdout.fnmatch_lines([
         "*Eggs.__init__ *PASSED*",
         "*Eggs.blarg*PASSED*",
@@ -37,30 +48,33 @@ def test_cython_ext_module(testdir):
     assert result.ret == 0
 
 
-def test_wrap_c_ext_module(testdir):
+@pytest.mark.parametrize('import_mode', IMPORT_MODES)
+def test_wrap_c_ext_module(testdir, import_mode):
     module = get_module('wrap_c_ext_module')
     assert module.check()
-    result = testdir.runpytest('-vv', '--doctest-cython', str(module))
+    result = run_pytest(testdir, module, import_mode)
     result.stdout.fnmatch_lines([
         "*sqr*PASSED*",
     ])
     assert result.ret == 0
 
 
-def test_wrap_cpp_ext_module(testdir):
+@pytest.mark.parametrize('import_mode', IMPORT_MODES)
+def test_wrap_cpp_ext_module(testdir, import_mode):
     module = get_module('wrap_cpp_ext_module')
     assert module.check()
-    result = testdir.runpytest('-vv', '--doctest-cython', str(module))
+    result = run_pytest(testdir, module, import_mode)
     result.stdout.fnmatch_lines([
         "*sqr*PASSED*",
     ])
     assert result.ret == 0
 
 
-def test_pure_py_module(testdir):
+@pytest.mark.parametrize('import_mode', IMPORT_MODES)
+def test_pure_py_module(testdir, import_mode):
     module = get_module('pure_py_module', suffix='.py')
     assert module.check()
-    result = testdir.runpytest('-vv', '--doctest-cython', str(module))
+    result = run_pytest(testdir, module, import_mode)
     result.stdout.fnmatch_lines([
         "*Eggs.__init__*PASSED*",
         "*Eggs.foo*PASSED*",
