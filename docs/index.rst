@@ -1,21 +1,10 @@
-========
-Contents
-========
+#############
+pytest-cython
+#############
 
-.. toctree::
-   :maxdepth: 2
+.. contents::
+   :depth: 2
 
-   readme
-   installation
-   usage
-   reference/index
-   contributing
-   changelog
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
-
+.. include:: ../README.rst
+.. include:: ../CHANGELOG.rst
+.. include:: ../CONTRIBUTING.rst
