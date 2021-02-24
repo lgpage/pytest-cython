@@ -38,7 +38,7 @@ if __name__ == "__main__":
 
     setup(
         name='pytest-cython',
-        version='0.1.1',
+        version='0.2.0.dev0',
         description="Example Cython project for pytest-cython tests",
         package_dir={'': 'src'},
         packages=['pypackage'],
