@@ -73,3 +73,11 @@ cdef class Eggs:
         2
         """
         return self.a + self.b
+
+    def failing_test(self):
+        """
+        >>> eggs = Eggs(1, 1)
+        >>> eggs.failing_test()
+        False
+        """
+        return True
