@@ -1,17 +1,13 @@
-
 Changelog
 =========
 
-0.1.x
------
-
 0.1.0
-~~~~~
+-----
 
 First release on PyPI (2016-04-17).
 
 0.1.1
-~~~~~
+-----
 
 The full list of merged PRs is:
 

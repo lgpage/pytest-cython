@@ -9,7 +9,7 @@ Overview
     * - docs
       - |docs|
     * - tests
-      - |travis| |appveyor| |requires|
+      - |travis| |requires|
     * - package
       - |version| |downloads| |wheel| |supported-versions| |supported-implementations|
 
@@ -20,10 +20,6 @@ Overview
 .. |travis| image:: https://api.travis-ci.org/lgpage/pytest-cython.svg?branch=master
     :alt: Travis-CI Build Status
     :target: https://travis-ci.org/lgpage/pytest-cython
-
-.. |appveyor| image:: https://ci.appveyor.com/api/projects/status/github/lgpage/pytest-cython?branch=master&svg=true
-    :alt: AppVeyor Build Status
-    :target: https://ci.appveyor.com/project/lgpage/pytest-cython
 
 .. |requires| image:: https://requires.io/github/lgpage/pytest-cython/requirements.svg?branch=master
     :alt: Requirements Status
@@ -66,22 +62,23 @@ You can install "pytest-cython" via `pip`_ from `PyPI`_::
 Usage
 =====
 
-Basic usage::
+Basic usage:
 
-    py.test --doctest-cython
+.. code-block:: shell
+
+    pytest --doctest-cython
+
+You can also run the doctests for a single ``.pyx`` file like:
+
+.. code-block:: shell
+
+    pytest --doctest-cython path/to/module.pyx
 
 Note
 ----
 
 * It is assumed that the C extension modules have been build inplace before
-  running `py.test` and there is a matching Cython `.pyx` file
-
-
-Contributing
-============
-Contributions are very welcome. Tests can be run with `tox`_::
-
-    tox
+  running ``py.test`` and there is a matching Cython ``.pyx`` file
 
 
 License

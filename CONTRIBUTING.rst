@@ -1,4 +1,3 @@
-============
 Contributing
 ============
 
@@ -6,7 +5,7 @@ Contributions are welcome, and they are greatly appreciated! Every
 little bit helps, and credit will always be given.
 
 Bug reports
-===========
+-----------
 
 When `reporting a bug <https://github.com/lgpage/pytest-cython/issues>`_ please
 include:
@@ -17,14 +16,14 @@ include:
     * Detailed steps to reproduce the bug.
 
 Documentation improvements
-==========================
+--------------------------
 
 pytest-cython could always use more documentation, whether as part of the
 official pytest-cython docs, in docstrings, or even on the web in blog posts,
 articles, and such.
 
 Feature requests and feedback
-=============================
+-----------------------------
 
 The best way to send feedback is to file an issue at
 https://github.com/lgpage/pytest-cython/issues.
@@ -37,9 +36,9 @@ If you are proposing a feature:
   are welcome :)
 
 Development
-===========
+-----------
 
-To set up `pytest-cython` for local development:
+To set up ``pytest-cython`` for local development:
 
 1. Fork `pytest-cython <https://github.com/lgpage/pytest-cython>`_
    (look for the "Fork" button).
@@ -53,9 +52,8 @@ To set up `pytest-cython` for local development:
 
    Now you can make your changes locally.
 
-4. When you're done making changes, run all the checks, doc builder and spell
-   checker with `tox <https://tox.readthedocs.io/en/latest/install.html>`_ one
-   command::
+4. When you're done making changes, run all the checks, doc builder and
+   spell checker with the `tox`_ command::
 
     tox
 
@@ -68,7 +66,7 @@ To set up `pytest-cython` for local development:
 6. Submit a pull request through the GitHub website.
 
 Pull Request Guidelines
------------------------
+^^^^^^^^^^^^^^^^^^^^^^^
 
 If you need some code review or feedback while you're developing the code just
 make the pull request.
@@ -88,7 +86,7 @@ For merging, you should:
        It will be slower though ...
 
 Tips
-----
+^^^^
 
 To run a subset of tests::
 
@@ -98,3 +96,6 @@ To run all the test environments in *parallel* (you need to
 ``pip install detox``)::
 
     detox
+
+
+.. _`tox`: https://tox.readthedocs.io/en/latest/
