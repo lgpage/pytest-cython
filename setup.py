@@ -16,7 +16,7 @@ with open(path.join(this_directory, 'README.rst')) as readme_file:
 
 setup(
     name='pytest-cython',
-    version='0.2.0.dev0',
+    version='0.2.0',
     description='A plugin for testing Cython extension modules',
     long_description=long_description,
     long_description_content_type='text/x-rst',
@@ -31,7 +31,7 @@ setup(
     zip_safe=False,
     classifiers=[
         # complete classifier list: https://pypi.org/pypi?%3Aaction=list_classifiers
-        'Development Status :: 4 - Beta',
+        'Development Status :: 5 - Production/Stable',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: MIT License',
         'Operating System :: Unix',
