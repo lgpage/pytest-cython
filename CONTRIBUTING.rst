@@ -98,4 +98,4 @@ To run all the test environments in *parallel* (you need to
     detox
 
 
-.. _`tox`: https://tox.readthedocs.io/en/latest/
+.. _`tox`: https://tox.wiki/en/latest/
