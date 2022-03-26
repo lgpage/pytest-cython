@@ -9,7 +9,7 @@ Overview
     * - docs
       - |docs|
     * - tests
-      - |travis| |requires|
+      - |travis|
     * - package
       - |version| |downloads| |wheel| |supported-versions| |supported-implementations|
 
@@ -20,10 +20,6 @@ Overview
 .. |travis| image:: https://api.travis-ci.org/lgpage/pytest-cython.svg?branch=master
     :alt: Travis-CI Build Status
     :target: https://travis-ci.org/lgpage/pytest-cython
-
-.. |requires| image:: https://requires.io/github/lgpage/pytest-cython/requirements.svg?branch=master
-    :alt: Requirements Status
-    :target: https://requires.io/github/lgpage/pytest-cython/requirements/?branch=master
 
 .. |version| image:: https://img.shields.io/pypi/v/pytest-cython.svg?style=flat
     :alt: PyPI Package latest release
@@ -113,7 +109,7 @@ This `Pytest`_ plugin was generated with `Cookiecutter`_ along with
 .. _`cookiecutter-pylibrary`: https://github.com/ionelmc/cookiecutter-pylibrary
 .. _`file an issue`: https://github.com/lgpage/pytest-cython/issues
 .. _`pytest`: https://github.com/pytest-dev/pytest
-.. _`tox`: https://tox.readthedocs.io/en/latest/
+.. _`tox`: https://tox.wiki/en/latest/
 .. _`pip`: https://pypi.org/project/pip/
 .. _`PyPI`: https://pypi.org
 .. _`Cython`: https://cython.org/
