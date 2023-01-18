@@ -7,6 +7,7 @@ import sysconfig
 
 import pytest
 import py.path
+from pathlib import Path
 
 import _pytest
 from _pytest.doctest import get_optionflags
@@ -54,7 +55,12 @@ def pytest_collect_file(path, parent):
             # only run test if matching .so and .pyx files exist
             # create addoption for this ??
             if hasattr(DoctestModule, 'from_parent'):
-                return DoctestModule.from_parent(parent, fspath=path)
+                try:
+                    # fspath for Node constructors deprecated since
+                    # pytest version 7.0., replaced with pathlib.Path
+                    return DoctestModule.from_parent(parent, path=Path(str(path)))
+                except TypeError:
+                    return DoctestModule.from_parent(parent, fspath=path)
             else:
                 # Backwards-compat for older pytest
                 return DoctestModule(path, parent)
