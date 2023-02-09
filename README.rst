@@ -6,20 +6,24 @@ Overview
 .. list-table::
     :stub-columns: 1
 
-    * - docs
-      - |docs|
-    * - tests
-      - |travis|
     * - package
       - |version| |downloads| |wheel| |supported-versions| |supported-implementations|
+    * - tests
+      - |ci-lint| |ci-test|
+    * - docs
+      - |docs|
 
 .. |docs| image:: https://readthedocs.org/projects/pytest-cython/badge/?style=flat
-    :target: https://readthedocs.org/projects/pytest-cython
     :alt: Documentation Status
+    :target: https://readthedocs.org/projects/pytest-cython
 
-.. |travis| image:: https://api.travis-ci.org/lgpage/pytest-cython.svg?branch=master
-    :alt: Travis-CI Build Status
-    :target: https://travis-ci.org/lgpage/pytest-cython
+.. |ci-lint| image:: https://github.com/lgpage/pytest-cython/actions/workflows/python-check.yml/badge.svg?branch=main
+    :alt: CI Lint Status
+    :target: https://github.com/lgpage/pytest-cython/actions/workflows/python-check.yml?query=branch%3Amain
+
+.. |ci-test| image:: https://github.com/lgpage/pytest-cython/actions/workflows/python-test.yml/badge.svg?branch=main
+    :alt: CI Lint Status
+    :target: https://github.com/lgpage/pytest-cython/actions/workflows/python-test.yml?query=branch%3Amain
 
 .. |version| image:: https://img.shields.io/pypi/v/pytest-cython.svg?style=flat
     :alt: PyPI Package latest release

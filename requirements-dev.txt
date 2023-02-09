@@ -1,0 +1,5 @@
+check-manifest
+cython
+flake8
+nox
+pytest

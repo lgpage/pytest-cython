@@ -42,6 +42,7 @@ To set up ``pytest-cython`` for local development:
 
 1. Fork `pytest-cython <https://github.com/lgpage/pytest-cython>`_
    (look for the "Fork" button).
+
 2. Clone your fork locally::
 
     git clone git@github.com:your_name_here/pytest-cython.git

@@ -31,6 +31,7 @@ pip-log.txt
 # Unit test / coverage reports
 .coverage
 .tox
+.nox
 .coverage.*
 nosetests.xml
 coverage.xml
@@ -62,6 +63,7 @@ docs/_build
 .env
 .cache
 .pytest
+.pytest_cache
 .bootstrap
 .appveyor.token
 *.bak

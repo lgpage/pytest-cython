@@ -1,7 +1,5 @@
 from __future__ import absolute_import
 
-import sysconfig
-
 import py
 import pytest
 from setuptools.sandbox import run_setup
@@ -23,8 +21,7 @@ def get_module(basename, suffix='.pyx'):
 
 
 def run_pytest(testdir, module, import_mode):
-    return testdir.runpytest('-vv', '--doctest-cython',
-                             '--import-mode', import_mode, str(module))
+    return testdir.runpytest('-vv', '--doctest-cython', '--import-mode', import_mode, str(module))
 
 
 @pytest.fixture(scope='module', autouse=True)
