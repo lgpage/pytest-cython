@@ -47,8 +47,8 @@ Overview
 
 .. end-badges
 
-This `Pytest`_ plugin allows for the doctesting of C extension modules
-for Python, specifically created through `Cython`_.
+This `pytest`_ plugin allows for the doctesting of C extension modules for Python, specifically created through
+`cython`_.
 
 
 Installation
@@ -68,7 +68,7 @@ Basic usage:
 
     pytest --doctest-cython
 
-You can also run the doctests for a single ``.pyx`` file like:
+You can also run the doctests for a single ``.pyx`` file as such:
 
 .. code-block:: shell
 
@@ -77,43 +77,30 @@ You can also run the doctests for a single ``.pyx`` file like:
 Note
 ----
 
-* It is assumed that the C extension modules have been build inplace before
-  running ``py.test`` and there is a matching Cython ``.pyx`` file
-
-
-License
-=======
-
-* Free software: MIT license
-
-Distributed under the terms of the `MIT`_ license, "pytest-cython" is free and
-open source software
+It is assumed that the C extension modules have been build in place before running ``py.test`` and there is a
+matching Cython ``.pyx`` file
 
 
 Issues
 ======
 
-If you encounter any problems, please `file an issue`_ along with a detailed
-description.
+If you encounter any problems, please `file an issue`_ along with a detailed description.
 
 
 Acknowledgements
 ================
 
-This `Pytest`_ plugin was generated with `Cookiecutter`_ along with
-`@hackebrot`_'s `Cookiecutter-pytest-plugin`_ and `@ionelmc`_'s
-`cookiecutter-pylibrary`_ templates.
+This `pytest`_ plugin was generated with `cookiecutter`_ along with `@hackebrot`_'s `cookiecutter-pytest-plugin`_
+and `@ionelmc`_'s `cookiecutter-pylibrary`_ templates.
 
 
-.. _`Cookiecutter`: https://github.com/cookiecutter/cookiecutter
 .. _`@hackebrot`: https://github.com/hackebrot
 .. _`@ionelmc`: https://github.com/ionelmc
-.. _`MIT`: https://opensource.org/licenses/MIT
-.. _`cookiecutter-pytest-plugin`: https://github.com/pytest-dev/cookiecutter-pytest-plugin
 .. _`cookiecutter-pylibrary`: https://github.com/ionelmc/cookiecutter-pylibrary
+.. _`cookiecutter-pytest-plugin`: https://github.com/pytest-dev/cookiecutter-pytest-plugin
+.. _`cookiecutter`: https://github.com/cookiecutter/cookiecutter
+.. _`cython`: https://cython.org/
 .. _`file an issue`: https://github.com/lgpage/pytest-cython/issues
-.. _`pytest`: https://github.com/pytest-dev/pytest
-.. _`tox`: https://tox.wiki/en/latest/
 .. _`pip`: https://pypi.org/project/pip/
 .. _`PyPI`: https://pypi.org
-.. _`Cython`: https://cython.org/
+.. _`pytest`: https://github.com/pytest-dev/pytest
