@@ -10,7 +10,7 @@ from setuptools import setup
 this_directory = path.abspath(path.dirname(__file__))
 
 
-with open(path.join(this_directory, 'README.rst')) as readme_file:
+with open(path.join(this_directory, 'README.md')) as readme_file:
     long_description = readme_file.read()
 
 
@@ -19,7 +19,7 @@ setup(
     version='0.2.1.dev0',
     description='A plugin for testing Cython extension modules',
     long_description=long_description,
-    long_description_content_type='text/x-rst',
+    long_description_content_type='text/markdown',
     author='Logan Page',
     author_email='page.lg@gmail.com',
     license='MIT',
