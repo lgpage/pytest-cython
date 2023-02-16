@@ -5,6 +5,8 @@
 [![PyPI Wheel](https://img.shields.io/pypi/wheel/pytest-cython.svg?style=flat)](https://pypi.org/project/pytest-cython)
 [![Supported versions](https://img.shields.io/pypi/pyversions/pytest-cython.svg?style=flat)](https://pypi.org/project/pytest-cython)
 [![Supported implementations](https://img.shields.io/pypi/implementation/pytest-cython.svg?style=flat)](https://pypi.org/project/pytest-cython)
+[![Conda Version](https://img.shields.io/conda/vn/conda-forge/pytest-cython.svg)](https://anaconda.org/conda-forge/pytest-cython)
+[![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/pytest-cython.svg)](https://anaconda.org/conda-forge/pytest-cython)
 
 [![CI Check Status](https://github.com/lgpage/pytest-cython/actions/workflows/python-check.yml/badge.svg?branch=main)](https://github.com/lgpage/pytest-cython/actions/workflows/python-check.yml?query=branch%3Amain)
 [![CI Tests Status](https://github.com/lgpage/pytest-cython/actions/workflows/python-test.yml/badge.svg?branch=main)](https://github.com/lgpage/pytest-cython/actions/workflows/python-test.yml?query=branch%3Amain)
