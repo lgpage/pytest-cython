@@ -1,22 +1,37 @@
 Changelog
 =========
 
-0.3.0
+0.2.1
 -----
 
 The full list of merged PRs is:
 
+* PR #26: fix: pytest_collect_file to take into account pytest fspath deprecation in Node constructors
+* PR #29: chore: use GitHub actions instead of Travis
+
+Special thanks to the following contributors that made this release possible:
+
+- AlenkaF
+- shvenkat
+
+0.2.0
+-----
+
+The full list of merged PRs is:
+
+* PR #11: Update tests
 * PR #15, #17: Dropped support for Python 2, added support for Python 3.6+
-* PR #18: New patched pyimport implementation, maintaining better
-  compatibility with the installed pytest version
-* PR #19: Rework how test collection works, making it possible to directly
-  specify .pyx files to run, and reporting tests as being from the .pyx
-  files as opposed to the compiled extension modules
-* PR #20: Fix handling of Cython-generated autotestdicts; prevents running
-  the same tests repeatedly, and adds better reporting of test line numbers
+* PR #18: New patched pyimport implementation, maintaining better compatibility with the installed pytest version
+* PR #19: Rework how test collection works, making it possible to directly specify .pyx files to run, and reporting
+  tests as being from the .pyx files as opposed to the compiled extension modules
+* PR #20: Fix handling of cython generated autotestdicts; prevents running the same tests repeatedly, and adds better
+  reporting of test line numbers
 * PR #21: Add CI job with Windows
 * PR #22: Various documentation improvements
 
+Special thanks to the following contributors that made this release possible:
+
+- embray
 
 0.1.1
 -----
@@ -28,7 +43,7 @@ The full list of merged PRs is:
 * PR #7: Fix support for relative imports
 * PR #9: Maintain backwards compatibility for pytest 4.x
 
-Thanks to the following contributors who submitted PRs or reported issues that were merged/closed for this release:
+Special thanks to the following contributors that made this release possible:
 
 - embray
 - thrasibule
