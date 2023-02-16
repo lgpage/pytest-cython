@@ -6,8 +6,8 @@
 [![Supported versions](https://img.shields.io/pypi/pyversions/pytest-cython.svg?style=flat)](https://pypi.org/project/pytest-cython)
 [![Supported implementations](https://img.shields.io/pypi/implementation/pytest-cython.svg?style=flat)](https://pypi.org/project/pytest-cython)
 
-[![CI Lint Status](https://github.com/lgpage/pytest-cython/actions/workflows/python-check.yml/badge.svg?branch=main)](https://github.com/lgpage/pytest-cython/actions/workflows/python-check.yml?query=branch%3Amain)
-[![CI Lint Status](https://github.com/lgpage/pytest-cython/actions/workflows/python-test.yml/badge.svg?branch=main)](https://github.com/lgpage/pytest-cython/actions/workflows/python-test.yml?query=branch%3Amain)
+[![CI Check Status](https://github.com/lgpage/pytest-cython/actions/workflows/python-check.yml/badge.svg?branch=main)](https://github.com/lgpage/pytest-cython/actions/workflows/python-check.yml?query=branch%3Amain)
+[![CI Tests Status](https://github.com/lgpage/pytest-cython/actions/workflows/python-test.yml/badge.svg?branch=main)](https://github.com/lgpage/pytest-cython/actions/workflows/python-test.yml?query=branch%3Amain)
 [![Documentation Status](https://readthedocs.org/projects/pytest-cython/badge/?style=flat)](https://readthedocs.org/projects/pytest-cython)
 
 This [pytest](https://github.com/pytest-dev/pytest) plugin allows for the doctesting of C extension modules for
