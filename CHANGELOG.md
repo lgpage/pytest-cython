@@ -5,7 +5,9 @@
 The full list of merged changes is:
 
 - #26: fix: pytest_collect_file to take into account pytest fspath deprecation in Node constructors
-- #29: chore: use GitHub actions instead of Travis
+- #29: chore: use GitHub workflows in place of Travis
+- #30: chore: use markdown project files
+- #31: chore: add renovate bot
 
 Special thanks to the following contributors that made this release possible:
 
