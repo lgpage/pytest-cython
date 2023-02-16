@@ -14,8 +14,13 @@ include README.md
 include noxfile.py
 include requirements-dev.txt
 
-global-exclude *.py[cod] __pycache__ *.so *.pyd *.dylib .vscode/*
+global-exclude *.py[cod] __pycache__ *.so *.pyd *.dylib
 
-global-exclude tests/example-project/build/**/*
-global-exclude tests/example-project/src/pypackage/*.c
-global-exclude tests/example-project/src/pypackage/*.cpp
+exclude renovate.json
+
+exclude .github/**/*
+exclude .vscode/*
+
+exclude tests/example-project/build/**/*
+exclude tests/example-project/src/pypackage/*.c
+exclude tests/example-project/src/pypackage/*.cpp
