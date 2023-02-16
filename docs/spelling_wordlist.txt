@@ -1,4 +1,5 @@
 Acknowledgements
+AlenkaF
 args
 autotestdicts
 builtin
@@ -12,11 +13,13 @@ docstrings
 doctesting
 doctests
 embray
+fspath
 Indices
 inplace
 kwargs
 pyimport
 pytest
+shvenkat
 staticmethod
 staticmethods
 thrasibule

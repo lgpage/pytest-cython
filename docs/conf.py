@@ -10,6 +10,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 
 
 extensions = [
+    'myst_parser',
     'sphinx.ext.autodoc',
     'sphinx.ext.autosummary',
     'sphinx.ext.coverage',
@@ -26,7 +27,11 @@ if os.getenv('SPELLCHECK'):
     spelling_show_suggestions = True
     spelling_lang = 'en_US'
 
-source_suffix = '.rst'
+source_suffix = {
+    '.rst': 'restructuredtext',
+    '.md': 'markdown',
+}
+
 master_doc = 'index'
 project = 'pytest-cython'
 year = '2021'
@@ -36,8 +41,8 @@ copyright = '{0}, {1}'.format(year, author)
 pygments_style = 'trac'
 templates_path = ['.']
 extlinks = {
-    'issue': ('https://github.com/lgpage/pytest-cython/issues/%s', '#'),
-    'pr': ('https://github.com/lgpage/pytest-cython/pull/%s', 'PR #'),
+    'issue': ('https://github.com/lgpage/pytest-cython/issues/%s', '#%s'),
+    'pr': ('https://github.com/lgpage/pytest-cython/pull/%s', 'PR #%s'),
 }
 
 html_theme = "sphinx_py3doc_enhanced_theme"

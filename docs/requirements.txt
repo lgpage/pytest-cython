@@ -1,3 +1,4 @@
+myst-parser
 pyenchant
 sphinx-py3doc-enhanced-theme
 sphinx>=1.3
