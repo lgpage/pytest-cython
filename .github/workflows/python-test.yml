@@ -27,7 +27,7 @@ jobs:
             pytest-version: "5"
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }} [pytest ${{ matrix.pytest-version }}, cython ${{ matrix.cython-version }}]
       uses: actions/setup-python@v4
       with:
