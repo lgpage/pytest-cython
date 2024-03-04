@@ -1,5 +1,7 @@
+bumpversion
 check-manifest
 cython
 flake8
+isort
 nox
 pytest

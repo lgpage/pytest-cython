@@ -16,7 +16,7 @@ with open(path.join(this_directory, 'README.md')) as readme_file:
 
 setup(
     name='pytest-cython',
-    version='0.2.2.dev0',
+    version='0.2.2',
     description='A plugin for testing Cython extension modules',
     long_description=long_description,
     long_description_content_type='text/markdown',
