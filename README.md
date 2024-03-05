@@ -42,6 +42,15 @@ pytest --doctest-cython path/to/module.pyx
 It is assumed that the C extension modules have been build in place before running `py.test` and there is a
 matching Cython `.pyx` file
 
+## Compatibility
+
+The following table describes the versions of Pytest and Cython the each version of the pytest-cython plugin is
+compatible with.
+
+| Version | Pytest | Cython  |
+| ------- | ------ | ------- |
+| 0.2.x   | 6, 7   | 0.29, 3 |
+
 ## Issues
 
 If you encounter any problems, please [file an issue](https://github.com/lgpage/pytest-cython/issues) along with a

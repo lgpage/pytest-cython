@@ -33,8 +33,6 @@ setup(
         'Development Status :: 5 - Production/Stable',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: MIT License',
-        'Operating System :: Unix',
-        'Operating System :: POSIX',
         'Programming Language :: Python',
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: Implementation :: CPython',
@@ -46,7 +44,7 @@ setup(
         'pytest', 'py.test', 'cython', 'doctest',
     ],
     install_requires=[
-        'pytest>=4.6.0',
+        'pytest>=4.6,<8',
     ],
     entry_points={
         'pytest11': [
