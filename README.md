@@ -49,6 +49,7 @@ compatible with.
 
 | Version | Pytest | Cython  |
 | ------- | ------ | ------- |
+| 0.3.x   | 8      | 0.29, 3 |
 | 0.2.x   | 6, 7   | 0.29, 3 |
 
 ## Issues
