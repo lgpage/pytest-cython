@@ -18,7 +18,7 @@ jobs:
       matrix:
         os: [ubuntu-latest, windows-latest]
         python-version: ["3.10", "3.11", "3.12", "pypy3.10"]
-        pytest-version: ["6", "7"]
+        pytest-version: ["8"]
         cython-version: ["0.29", "3"]
 
     steps:
