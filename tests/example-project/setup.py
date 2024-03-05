@@ -3,7 +3,6 @@
 
 
 if __name__ == "__main__":
-    import os
     import sys
 
     from setuptools import setup
@@ -11,29 +10,15 @@ if __name__ == "__main__":
     from Cython.Build import cythonize
 
     directives = {
-        'profile': True,
+        'autotestdict': True,
         'embedsignature': False,
-        'linetrace': False,
         'language_level': sys.version_info[0],
-        # this is the default, but use it explicitly in case that ever
-        # changes
-        'autotestdict': True
+        'linetrace': False,
+        'profile': False,
     }
 
-    # Enable code coverage for C code: we can't use CFLAGS=-coverage in
-    # tox.ini, since that may mess with compiling dependencies (e.g. numpy).
-    # Therefore we set SETUPPY_CFLAGS=-coverage in tox.ini and copy it to
-    # CFLAGS here (after deps have been safely installed).
-    macros = []
-    if 'TOXENV' in os.environ and 'SETUPPY_CFLAGS' in os.environ:
-        os.environ['CFLAGS'] = os.environ['SETUPPY_CFLAGS']
-        if '-coverage' in os.environ['SETUPPY_CFLAGS']:
-            directives['linetrace'] = True
-            macros = [[('CYTHON_TRACE', '1'), ('CYTHON_TRACE_NOGIL', '1')]]
-
-
     extensions = [
-        Extension('*', ['src/pypackage/*.pyx'], define_macros=macros)
+        Extension('*', ['src/pypackage/*.pyx'])
     ]
 
     setup(

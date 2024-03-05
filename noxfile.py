@@ -20,17 +20,12 @@ def check(session):
 
 
 @nox.session
-@nox.parametrize(
-    "python,pytest",
-    [
-        (python, pytest)
-        for python in ("3.9", "3.10", "3.11", "pypy3")
-        for pytest in ("5", "6", "7")
-        if (python, pytest) != ("3.10", "5") and (python, pytest) != ("3.11", "5")
-    ],
-)
-@nox.parametrize('cython', ["0.29"])
+@nox.parametrize('python', ["3.10", "3.11", "3.12"])
+@nox.parametrize('pytest', ["6", "7"])
+@nox.parametrize('cython', ["0.29", "3"])
 def test(session, pytest, cython):
+    session.install("--upgrade", "setuptools")
+
     session.install(f"pytest=={pytest}.*")
     session.install(f"cython=={cython}.*")
     session.install("-e", ".")
