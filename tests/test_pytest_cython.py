@@ -6,6 +6,7 @@ import shutil
 
 from setuptools.sandbox import run_setup
 
+# import pytest_cython as a quite check to ensure it was installed before running tests
 import pytest_cython.plugin
 
 
@@ -13,18 +14,15 @@ ROOT_PATH = pathlib.Path(__file__).parent
 PROJECT_PATH = ROOT_PATH.joinpath('example-project')
 PACKAGE_PATH = PROJECT_PATH.joinpath('src', 'pypackage')
 
-PYTEST_MAJOR_VERSION = int(pytest.__version__.split('.')[0])
-IMPORT_MODES = ['prepend', 'append']
-if PYTEST_MAJOR_VERSION >= 6:
-    IMPORT_MODES.insert(0, 'importlib')
+IMPORT_MODES = ["importlib"]
 
 
-def get_module(basename, suffix='.pyx'):
+def get_module(basename: str, suffix='.pyx') -> pathlib.Path:
     return PACKAGE_PATH.joinpath(basename + suffix)
 
 
-def run_pytest(testdir, module, import_mode):
-    return testdir.runpytest('-vv', '--doctest-cython', '--import-mode', import_mode, str(module))
+def run_pytest(pytester: pytest.Pytester, module: pathlib.Path, import_mode) -> pytest.RunResult:
+    return pytester.runpytest('-vv', '--doctest-cython', '--import-mode', import_mode, str(module))
 
 
 @pytest.fixture(scope='module', autouse=True)
@@ -43,13 +41,13 @@ def build_example_project():
 
 
 @pytest.mark.parametrize('import_mode', IMPORT_MODES)
-def test_cython_ext_module(testdir, import_mode):
+def test_cython_ext_module(pytester, import_mode):
     module = get_module('cython_ext_module')
     assert module.exists()
 
-    result = run_pytest(testdir, module, import_mode)
+    result = run_pytest(pytester, module, import_mode)
     result.stdout.fnmatch_lines([
-        "*Eggs.__init__ *PASSED*",
+        "*Eggs.__init__*PASSED*",
         "*Eggs.blarg*PASSED*",
         "*Eggs.failing_test*FAILED*",
         "*Eggs.fubar*PASSED*",
@@ -68,11 +66,11 @@ def test_cython_ext_module(testdir, import_mode):
 
 
 @pytest.mark.parametrize('import_mode', IMPORT_MODES)
-def test_wrap_c_ext_module(testdir, import_mode):
+def test_wrap_c_ext_module(pytester, import_mode):
     module = get_module('wrap_c_ext_module')
     assert module.exists()
 
-    result = run_pytest(testdir, module, import_mode)
+    result = run_pytest(pytester, module, import_mode)
     result.stdout.fnmatch_lines([
         "*sqr*PASSED*",
     ])
@@ -80,11 +78,11 @@ def test_wrap_c_ext_module(testdir, import_mode):
 
 
 @pytest.mark.parametrize('import_mode', IMPORT_MODES)
-def test_wrap_cpp_ext_module(testdir, import_mode):
+def test_wrap_cpp_ext_module(pytester, import_mode):
     module = get_module('wrap_cpp_ext_module')
     assert module.exists()
 
-    result = run_pytest(testdir, module, import_mode)
+    result = run_pytest(pytester, module, import_mode)
     result.stdout.fnmatch_lines([
         "*sqr*PASSED*",
     ])
@@ -92,11 +90,11 @@ def test_wrap_cpp_ext_module(testdir, import_mode):
 
 
 @pytest.mark.parametrize('import_mode', IMPORT_MODES)
-def test_pure_py_module(testdir, import_mode):
+def test_pure_py_module(pytester, import_mode):
     module = get_module('pure_py_module', suffix='.py')
     assert module.exists()
 
-    result = run_pytest(testdir, module, import_mode)
+    result = run_pytest(pytester, module, import_mode)
     result.stdout.fnmatch_lines([
         "*Eggs.__init__*PASSED*",
         "*Eggs.foo*PASSED*",
