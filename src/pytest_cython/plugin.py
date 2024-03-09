@@ -195,7 +195,7 @@ class DoctestModule(pytest.Module):
             del tests[test_name]
             tests[equiv_test_name].lineno = lineno
 
-        for test in tests.values():
+        for test in sorted(tests.values(), key=lambda x: x.name):
             if test.examples:  # skip empty doctests
                 if hasattr(DoctestItem, 'from_parent'):
                     yield DoctestItem.from_parent(self, name=test.name, runner=runner, dtest=test)
