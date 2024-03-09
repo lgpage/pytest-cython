@@ -6,14 +6,14 @@ cdef int cfoo(int a, int b) except? -1:
     """
     return a + b
 
-cdef int cbar(int a, int b) nogil except? -1:
+cdef int cbar(int a, int b) except? -1 nogil:
     """
     >>> cbar(1, 1)
     2
     """
     return a + b
 
-cdef inline int cspam(int a, int b) nogil except? -1:
+cdef inline int cspam(int a, int b) except? -1 nogil:
     """
     >>> cspam(1, 1)
     2
@@ -42,7 +42,7 @@ cdef class Eggs:
         """
         return self.a + self.b
 
-    cdef int bar(Eggs self) nogil except? -1:
+    cdef int bar(Eggs self) except? -1 nogil:
         """
         >>> eggs = Eggs(1, 1)
         >>> eggs.bar()
@@ -50,7 +50,7 @@ cdef class Eggs:
         """
         return self.a + self.b
 
-    cdef int spam(Eggs self) nogil except? -1:
+    cdef int spam(Eggs self) except? -1 nogil:
         """
         >>> eggs = Eggs(1, 1)
         >>> eggs.spam()

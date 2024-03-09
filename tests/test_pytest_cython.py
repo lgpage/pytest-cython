@@ -14,7 +14,7 @@ ROOT_PATH = pathlib.Path(__file__).parent
 PROJECT_PATH = ROOT_PATH.joinpath('example-project')
 PACKAGE_PATH = PROJECT_PATH.joinpath('src', 'pypackage')
 
-IMPORT_MODES = ["importlib"]
+IMPORT_MODES = ["append", "prepend", "importlib"]
 
 
 def get_module(basename: str, suffix='.pyx') -> pathlib.Path:
