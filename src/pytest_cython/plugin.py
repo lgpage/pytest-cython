@@ -11,7 +11,7 @@ from typing import Any, Iterable
 
 from _pytest.nodes import Collector
 from _pytest.doctest import skip, DoctestModule, DoctestItem
-from _pytest.pathlib import ImportMode
+from _pytest.pathlib import resolve_package_path, ImportMode
 
 
 CYTHON_SUFFIXES = ['.py', '.pyx']
@@ -74,23 +74,37 @@ class _PatchedDoctestModule(DoctestModule):
         return _add_line_numbers(module, items)
 
 
-def _true_stem(path: str | pathlib.Path) -> str:
-    stem = pathlib.Path(path).stem
-    if stem == path:
-        return stem
+def _without_suffixes(path: str | pathlib.Path) -> pathlib.Path:
+    path = pathlib.Path(path)
+    return path.with_name(path.name.split('.')[0]).with_suffix('')
 
-    return _true_stem(stem)
+
+def _get_module_name(path: pathlib.Path) -> str:
+    pkg_path = resolve_package_path(path)
+    if pkg_path is not None:
+        pkg_root = pkg_path.parent
+        names = list(path.with_suffix("").relative_to(pkg_root).parts)
+        if names[-1] == "__init__":
+            names.pop()
+        module_name = ".".join(names)
+    else:
+        pkg_root = path.parent
+        module_name = path.stem
+
+    return module_name
 
 
 def _check_module_import(module: Any, path: pathlib.Path, mode: ImportMode) -> None:
+    # double check that the only difference is the extension else raise an exception
+
     if mode is ImportMode.importlib or IGNORE_IMPORTMISMATCH == "1":
         return
 
-    # double check that the only difference is the extension else raise an exception
-    module_file = _true_stem(module.__file__)
-    module_name = _true_stem(path)
+    module_name = _get_module_name(path)
+    module_file = _without_suffixes(module.__file__)
+    import_file = _without_suffixes(path)
 
-    if pathlib.Path(module_file) == pathlib.Path(module_name):
+    if module_file == import_file:
         return
 
     raise Collector.CollectError(
@@ -100,7 +114,7 @@ def _check_module_import(module: Any, path: pathlib.Path, mode: ImportMode) -> N
         "which is not the same as the test file we want to collect:\n"
         "  %s\n"
         "HINT: remove __pycache__ / .pyc files and/or use a "
-        "unique basename for your test file modules" % (module_name, module_file, path)
+        "unique basename for your test file modules" % (module_name, module_file, import_file)
     )
 
 
