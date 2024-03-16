@@ -21,7 +21,7 @@ def check(session):
 
 @nox.session
 @nox.parametrize('python', ["3.10", "3.11", "3.12"])
-@nox.parametrize('pytest', ["6", "7"])
+@nox.parametrize('pytest', ["8"])
 @nox.parametrize('cython', ["0.29", "3"])
 def test(session, pytest, cython):
     session.install("--upgrade", "setuptools")
