@@ -11,7 +11,7 @@ from typing import Any, Iterable
 
 from _pytest.nodes import Collector
 from _pytest.doctest import skip, DoctestModule, DoctestItem
-from _pytest.pathlib import _is_same, ImportMode
+from _pytest.pathlib import ImportMode
 
 
 CYTHON_SUFFIXES = ['.py', '.pyx']
@@ -90,7 +90,7 @@ def _check_module_import(module: Any, path: pathlib.Path, mode: ImportMode) -> N
     module_file = _true_stem(module.__file__)
     module_name = _true_stem(path)
 
-    if _is_same(module_file, module_name):
+    if pathlib.Path(module_file) == pathlib.Path(module_name):
         return
 
     raise Collector.CollectError(
