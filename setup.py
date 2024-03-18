@@ -44,7 +44,7 @@ setup(
         'pytest', 'py.test', 'cython', 'doctest',
     ],
     install_requires=[
-        'pytest>=4.6,<8',
+        'pytest>=8.1,<9',
     ],
     entry_points={
         'pytest11': [
