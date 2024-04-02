@@ -7,7 +7,7 @@ import sysconfig
 
 import pytest
 
-from typing import Any, Iterable
+from typing import Any, Iterable, Union
 
 from _pytest.nodes import Collector
 from _pytest.doctest import skip, DoctestModule, DoctestItem
@@ -74,7 +74,7 @@ class _PatchedDoctestModule(DoctestModule):
         return _add_line_numbers(module, items)
 
 
-def _without_suffixes(path: str | pathlib.Path) -> pathlib.Path:
+def _without_suffixes(path: Union[str, pathlib.Path]) -> pathlib.Path:
     path = pathlib.Path(path)
     return path.with_name(path.name.split('.')[0]).with_suffix('')
 
