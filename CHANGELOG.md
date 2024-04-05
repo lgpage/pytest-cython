@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.2 Onwards
+
+Please see the [GitHub releases](https://github.com/lgpage/pytest-cython/releases) for what has changed
+
 ## 0.2.1
 
 The full list of merged changes is:
